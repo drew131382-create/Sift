@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-10-04T23:55:52.997407+08:00",
+  "model": "local/Sift-Qwen3-0.6B-QLoRA",
+  "revision": "7252e5c48ad95c76ed8900027d4df16f49a588ef966d1cef654b6af6db1e5a5a",
+  "bundleID": "com.sift.local",
+  "buildVersion": "2026100401",
+  "appBytes": 418802278,
+  "modelResourceBytes": 332773080,
+  "installedOnIPhone": true,
+  "installOutcome": "success",
+  "automaticLaunch": "blocked-by-device-lock",
+  "backgroundGPUEnabled": false,
+  "backgroundGPUReason": "Current provisioning profile lacks GPU entitlement; standard source capability retained",
+  "foregroundBuildPassed": true,
+  "bundledHashesVerified": true,
+  "codeSignatureVerified": true,
+  "originalBackup": "/Users/ivandrew/Desktop/Sift模型对比-2026-10-04/models/qwen3-0.6b-4bit/model.safetensors",
+  "originalBackupSHA256": "36162e7f72fe3eca308471e55161269e4605ab87d2666ae1f33ef800749c97dd",
+  "comparison": {
+    "sampleCount": 44,
+    "originalCorrect": 31,
+    "finetunedCorrect": 34,
+    "independentAcceptance": false
+  },
+  "newRegressionTestsRun": false,
+  "iPhoneInferenceMeasured": false,
+  "artifacts": {
+    "app": "/tmp/SiftLocalAI3/Build/Products/Debug-iphoneos/Sift.app",
+    "buildLog": "/tmp/Sift-finetuned-foreground-build.log",
+    "installLog": "/tmp/Sift-finetuned-install.log",
+    "launchLog": "/tmp/Sift-finetuned-launch.log"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "model": "local/Sift-Qwen3-0.6B-QLoRA",
+  "revision": "7252e5c48ad95c76ed8900027d4df16f49a588ef966d1cef654b6af6db1e5a5a",
+  "baseModel": "Qwen/Qwen3-0.6B-MLX-4bit",
+  "baseRevision": "173234aa840d113125e9f2271100ddbaf16c9620",
+  "baseWeightSha256": "36162e7f72fe3eca308471e55161269e4605ab87d2666ae1f33ef800749c97dd",
+  "adapterSha256": "817aedb6870c5ce210b723c6e20efe90a4bbecc0c9245844b21c9930a77669b5",
+  "labelSha256": "55199372b713cf910dd80d980f5e7d43b5e83da9535f2f72711c69197b666fb1",
+  "promptSha256": "adad6014ba353bf3025e87f65d800e87b3fb98cfea2239ccc5aa517f5630fbbd",
+  "selectedCheckpoint": {
+    "checkpoint": "/Users/ivandrew/Desktop/Sift-Qwen微调-2026-10-04/run-01/0000240_adapters.safetensors",
+    "n": 23,
+    "macroF1": 0.5151515151515151,
+    "groupCorrect": 17,
+    "exact": 17,
+    "falseInclude": 1
+  },
+  "humanConfirmed": false,
+  "independentAcceptance": false,
+  "numericFieldAccuracyEstablished": false,
+  "license": "Apache-2.0",
+  "quantizationBits": 4,
+  "deploymentAtTrainingCompletion": {
+    "deployedToApplication": false,
+    "installedOnIPhone": false
+  },
+  "bundledInSift": true,
+  "deploymentDecision": "User selected the measured improvement over the original model; independent acceptance remains pending."
+}

@@ -1,0 +1,62 @@
+{
+  "model": "local/Sift-Qwen3-0.6B-QLoRA",
+  "revision": "7252e5c48ad95c76ed8900027d4df16f49a588ef966d1cef654b6af6db1e5a5a",
+  "files": [
+    {
+      "name": "LICENSE",
+      "bytes": 11343,
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+    },
+    {
+      "name": "MODEL_CARD.md",
+      "bytes": 1082,
+      "sha256": "8e06adda27ecc611ad4546883cc2d45fdf98178864ea0896e39e06d36f26bc35"
+    },
+    {
+      "name": "README.md",
+      "bytes": 81,
+      "sha256": "748c964f9b7e5f2c3770ce013bbc0153be7c54311d9692c343b6188eefe77ac6"
+    },
+    {
+      "name": "config.json",
+      "bytes": 988,
+      "sha256": "0a07b68f1699472c68859db0fe6b46415c3ea1dee4d842216aadc1d2cda2e9c7"
+    },
+    {
+      "name": "merges.txt",
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    {
+      "name": "model.safetensors",
+      "bytes": 316825700,
+      "sha256": "7252e5c48ad95c76ed8900027d4df16f49a588ef966d1cef654b6af6db1e5a5a"
+    },
+    {
+      "name": "model.safetensors.index.json",
+      "bytes": 49770,
+      "sha256": "40d62d05e461c7a1389ccd783c240ccbf97cb2754c260078aa21c3556cf1b402"
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 11422654,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 9689,
+      "sha256": "a6389dfe64f259c5626a9b7e6d7e5a152bfe2973eae9b20e362bc450fea09239"
+    },
+    {
+      "name": "training-provenance.json",
+      "bytes": 1253,
+      "sha256": "043e36f4cd913e88d32b45e3ec4725394fe852b52f70951cd307f861b45b6315"
+    },
+    {
+      "name": "vocab.json",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  ],
+  "license": "Apache-2.0"
+}

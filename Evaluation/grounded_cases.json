@@ -1,0 +1,265 @@
+[
+  {
+    "id": "chat-question",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "微信",
+      "明天下午开会吗",
+      "再说吧"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "unconfirmed-invite",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "微信",
+      "周五晚上有空一起吃饭吗",
+      "还没确定"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "travel-idea",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "微信",
+      "准备下个月旅游",
+      "先看看机票"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "news-date",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "新闻",
+      "文章发布时间：2026年10月3日09:30",
+      "城市今天发布天气资讯"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "cancelled",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "您的预约已取消",
+      "牙科复诊",
+      "2026年10月3日09:30"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "payment-question",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "微信",
+      "支付成功了吗",
+      "还没有支付金额37.66"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "numbers-only",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "09:41",
+      "86%",
+      "123456"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "order-number-only",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "订单号：123456789"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "ordinary-chat",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "微信",
+      "今天吃什么",
+      "火锅吧"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "code-notice",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "包裹已到达",
+      "请凭3-301领取包裹",
+      "菜鸟驿站"
+    ],
+    "accepted": true,
+    "category": "delivery",
+    "numeric": {
+      "code": "3-301"
+    }
+  },
+  {
+    "id": "pickup-split",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "街角茶店",
+      "取餐码",
+      "55"
+    ],
+    "accepted": true,
+    "category": "pickup",
+    "numeric": {
+      "code": "55"
+    }
+  },
+  {
+    "id": "paid-label",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "赵一鸣",
+      "实付37.66",
+      "原价38.09",
+      "优惠0.43",
+      "余额500"
+    ],
+    "accepted": true,
+    "category": "payment",
+    "numeric": {
+      "amount": "37.66"
+    }
+  },
+  {
+    "id": "medical-notice",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "复诊安排",
+      "请您明天上午九点到市口腔医院就诊"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "明天上午九点"
+    }
+  },
+  {
+    "id": "appointment",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "预约详情",
+      "牙科复诊",
+      "2026年10月3日09:30",
+      "取消订单"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月3日09:30"
+    }
+  },
+  {
+    "id": "meeting",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "会议定在明天下午三点",
+      "产品评审会议"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "明天下午三点"
+    }
+  },
+  {
+    "id": "public-event",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "公开活动海报",
+      "城市设计论坛",
+      "公开售票时间：10月3日19:30",
+      "已订阅开场提醒"
+    ],
+    "accepted": true,
+    "category": "inspiration",
+    "numeric": {},
+    "allowedNumeric": {
+      "price": [
+        "676"
+      ]
+    }
+  },
+  {
+    "id": "hotel-reference",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "西湖酒店",
+      "房型选择",
+      "大床房报价¥676",
+      "10月15日入住10月17日离店",
+      "立即预订"
+    ],
+    "accepted": true,
+    "category": "place",
+    "numeric": {},
+    "allowedNumeric": {
+      "price": [
+        "676"
+      ]
+    }
+  },
+  {
+    "id": "product-reference",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "AirPods 5",
+      "商品报价RMB999",
+      "预购"
+    ],
+    "accepted": true,
+    "category": "inspiration",
+    "numeric": {
+      "price": "999"
+    }
+  },
+  {
+    "id": "refund-only",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [
+      "退款成功",
+      "退款金额37.66",
+      "赵一鸣"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "blank",
+    "origin": "synthetic-text-not-real-human-screenshot",
+    "lines": [],
+    "accepted": false,
+    "category": null,
+    "numeric": {},
+    "expectedFailure": true
+  }
+]

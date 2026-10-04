@@ -1,0 +1,1160 @@
+[
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "3-301",
+      "parcelStation" : "菜鸟驿站"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-001",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 7.104768991470337,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "4-302",
+      "parcelStation" : "顺丰自提点"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-002",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 5.5612030029296875,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "5-303",
+      "parcelStation" : "妈妈驿站"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-003",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 5.620085954666138,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "6-304",
+      "parcelStation" : "学校收发室"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-004",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 5.484215974807739,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "7-305",
+      "parcelStation" : "小区快递柜"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-005",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 7.822291970252991,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "pickup",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "A057",
+      "location" : "街角咖啡"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-006",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 4.571202993392944,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "pickup",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "A058"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-007",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 6.22317099571228,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "pickup",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "A059"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-008",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 6.260425925254822,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "pickup",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "A060"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-009",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 6.146169066429138,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "pickup",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "A061",
+      "location" : "茶饮店"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-010",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 4.98919403553009,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "牙科复诊",
+      "eventTime" : "2026年10月3日 09:30",
+      "location" : "市口腔医院"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-011",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 9.568436026573181,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : false,
+    "error" : "本地理解结果不完整，请重试。",
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-012",
+    "numericCorrect" : 0,
+    "numericTotal" : 1,
+    "seconds" : 10.306886911392212,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : false,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-013",
+    "numericCorrect" : 0,
+    "numericTotal" : 1,
+    "seconds" : 1.4266899824142456,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "音乐会",
+      "eventTime" : "2026年10月6日 19:30",
+      "location" : "城市音乐厅"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-014",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 7.014262914657593,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "酒店入住",
+      "eventTime" : "2026年10月7日 15:00",
+      "location" : "西湖酒店"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-015",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 5.958330988883972,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "24.00",
+      "merchant" : "街角咖啡"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-016",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 10.375908970832825,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "25.00",
+      "merchant" : "便利店"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-017",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 11.1127210855484,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "26.00",
+      "merchant" : "书店"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-018",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 13.470438003540039,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "27.00",
+      "merchant" : "面馆"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-019",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 10.632780909538269,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "28.00",
+      "merchant" : "水果店"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-020",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 8.838235020637512,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "shopping",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "99.00",
+      "orderStatus" : "待发货",
+      "product" : "咖啡机"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-021",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 6.0650129318237305,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "shopping",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "100.00",
+      "product" : "运动鞋"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-022",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 5.608845949172974,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "shopping",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "101.00",
+      "orderStatus" : "待发货",
+      "product" : "无线耳机"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-023",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 6.627058029174805,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "shopping",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "102.00",
+      "product" : "保温杯"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-024",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 4.839447021484375,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "shopping",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "103.00",
+      "product" : "台灯"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-025",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 5.367797017097473,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "documentation",
+    "decisionCorrect" : true,
+    "fields" : {
+      "documentReference" : "INV-2026-100",
+      "documentType" : "电子发票",
+      "excerpt" : "电子发票\n发票号码 INV-2026-100\n购买方 上海公司\n开票方 办公用品商店",
+      "merchant" : "上海公司"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-026",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 8.820006012916565,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "documentation",
+    "decisionCorrect" : true,
+    "fields" : {
+      "documentReference" : "INV-2026-101",
+      "documentType" : "电子发票",
+      "excerpt" : "办公用品商店",
+      "merchant" : "上海公司"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-027",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 6.387527942657471,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "documentation",
+    "decisionCorrect" : true,
+    "fields" : {
+      "documentReference" : "INV-2026-102",
+      "documentType" : "电子发票",
+      "excerpt" : "办公用品商店",
+      "merchant" : "上海公司"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-028",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 6.358821988105774,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "documentation",
+    "decisionCorrect" : true,
+    "fields" : {
+      "documentReference" : "INV-2026-103",
+      "excerpt" : "购买方 上海公司",
+      "merchant" : "上海公司"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-029",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 7.1363619565963745,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "documentation",
+    "decisionCorrect" : true,
+    "fields" : {
+      "documentReference" : "INV-2026-104",
+      "excerpt" : "购买方 上海公司",
+      "merchant" : "上海公司"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-030",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 7.3546119928359985,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "learning",
+    "decisionCorrect" : true,
+    "fields" : {
+      "excerpt" : "矩阵乘法与特征值的计算方法",
+      "topic" : "矩阵学习笔记",
+      "url" : "https:\/\/example.com\/resource"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-031",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.810675024986267,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "learning",
+    "decisionCorrect" : true,
+    "fields" : {
+      "excerpt" : "先炒鸡蛋，再炒番茄，合并翻炒",
+      "topic" : "番茄炒蛋食谱",
+      "url" : "https:\/\/example.com\/resource"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-032",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 6.1294249296188354,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "inspiration",
+    "decisionCorrect" : false,
+    "fields" : {
+      "excerpt" : "摄影教程 逆光人像的曝光补偿技巧 https:\/\/example.com\/resource"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-033",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.59711492061615,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "learning",
+    "decisionCorrect" : true,
+    "fields" : {
+      "excerpt" : "适合出发前阅读的五本旅行随笔",
+      "url" : "https:\/\/example.com\/resource"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-034",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 6.2871880531311035,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "inspiration",
+    "decisionCorrect" : false,
+    "fields" : {
+      "excerpt" : "SwiftUI课程 理解状态绑定与视图更新 https:\/\/example.com\/resource"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-035",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.189098954200745,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "place",
+    "decisionCorrect" : true,
+    "fields" : {
+      "address" : "浙江省杭州市西湖区",
+      "location" : "西湖",
+      "venue" : "地点详情"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-036",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.212131023406982,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "place",
+    "decisionCorrect" : true,
+    "fields" : {
+      "address" : "上海市淮海中路1555号",
+      "location" : "上海图书馆",
+      "venue" : "地点详情"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-037",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 6.9243550300598145,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "place",
+    "decisionCorrect" : true,
+    "fields" : {
+      "address" : "北京市海淀区香山路"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-038",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 8.220963954925537,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "place",
+    "decisionCorrect" : true,
+    "fields" : {
+      "address" : "南京市中山东路321号",
+      "location" : "博物馆",
+      "venue" : "地点详情"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-039",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 7.217532992362976,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "place",
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-040",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 7.718873023986816,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "inspiration",
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-041",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 9.406739950180054,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "inspiration",
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-042",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.8693870306015015,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "inspiration",
+    "decisionCorrect" : true,
+    "fields" : {
+      "excerpt" : "房间布置灵感 原木书桌搭配暖色台灯 收藏内容"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-043",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.518226981163025,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "inspiration",
+    "decisionCorrect" : true,
+    "fields" : {
+      "excerpt" : "周末拍照构图 前景树叶与远处山峰形成层次 收藏内容"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-044",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.569823980331421,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "inspiration",
+    "decisionCorrect" : true,
+    "fields" : {
+      "excerpt" : "收藏的短诗 月光落在窗边，夜色安静如水 收藏内容"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-045",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.068016052246094,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-046",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 2.09808349609375e-05,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-047",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.310939908027649,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-048",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.4617899656295776,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-049",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.2615619897842407,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-050",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.1694979667663574,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-051",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.23179292678833,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-052",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.2250940799713135,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-053",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.686661958694458,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-054",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.353355050086975,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-055",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.2635380029678345,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : false,
+    "fields" : {
+      "merchant" : "100.00"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-056",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 7.116207003593445,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-057",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.8177580833435059,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-058",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.1954890489578247,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-059",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.257469892501831,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "synthetic-060",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.46492600440979,
+    "unexpectedNumeric" : [
+
+    ]
+  }
+]

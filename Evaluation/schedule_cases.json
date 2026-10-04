@@ -1,0 +1,319 @@
+[
+  {
+    "id": "schedule-question",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "微信",
+      "明天下午开会吗？"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "schedule-invite",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "微信",
+      "明天上午十点面试有空吗？"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "schedule-idea",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "微信",
+      "准备下个月旅游"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "schedule-pending",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "会议时间待定，尚未确认"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "schedule-cancelled",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "预约详情",
+      "牙科复诊",
+      "就诊时间：2026年10月5日09:30",
+      "预约已取消"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "schedule-news",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "新闻",
+      "文章发布时间：2026年10月5日10:00",
+      "会议将于明天举行"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {},
+    "forbidden": {
+      "eventTime": [
+        "2026年10月5日10:00"
+      ]
+    }
+  },
+  {
+    "id": "schedule-order-date",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "订单创建时间：2026年10月5日10:00"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {},
+    "forbidden": {
+      "eventTime": [
+        "2026年10月5日10:00"
+      ]
+    }
+  },
+  {
+    "id": "schedule-status",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "86%",
+      "2026年10月5日"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {},
+    "forbidden": {
+      "eventTime": [
+        "09:41"
+      ],
+      "time": [
+        "09:41"
+      ]
+    }
+  },
+  {
+    "id": "schedule-notice",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "微信",
+      "会议定在明天下午三点，请准时到场"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "明天下午三点"
+    },
+    "expectedReview": false
+  },
+  {
+    "id": "schedule-implicit-clinic",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "皮肤科复诊",
+      "10月5日上午10点",
+      "县医院"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "10月5日上午10点"
+    },
+    "expectedReview": false
+  },
+  {
+    "id": "schedule-booking",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "预约详情",
+      "牙科复诊",
+      "就诊时间：2026年10月5日09:30",
+      "市口腔医院"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月5日09:30"
+    },
+    "expectedReview": false
+  },
+  {
+    "id": "schedule-rail",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "电子车票",
+      "已出票",
+      "G123 高铁出行",
+      "乘车时间：2026年10月5日08:20",
+      "上海虹桥站"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月5日08:20"
+    },
+    "expectedReview": false
+  },
+  {
+    "id": "schedule-hotel",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "酒店预订成功",
+      "西湖酒店",
+      "入住时间：2026年10月5日15:00"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月5日15:00"
+    },
+    "expectedReview": false
+  },
+  {
+    "id": "schedule-missing-time",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "牙科复诊预约已确认",
+      "具体就诊时间另行通知"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {},
+    "expectedReview": true
+  },
+  {
+    "id": "schedule-question-beside-booking",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "牙科复诊预约已确认",
+      "就诊时间：2026年10月5日09:30",
+      "需要带什么材料？"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月5日09:30"
+    },
+    "expectedReview": false
+  },
+  {
+    "id": "schedule-conflict",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "牙科复诊预约已确认",
+      "就诊时间：2026年10月5日09:30",
+      "就诊时间：2026年10月5日10:30"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {},
+    "expectedReview": true
+  },
+  {
+    "id": "schedule-poster",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "公开活动海报",
+      "城市音乐节",
+      "举办时间：2026年10月5日19:30",
+      "地点：城市公园",
+      "欢迎报名，音乐现场与市集"
+    ],
+    "accepted": true,
+    "category": null,
+    "numeric": {},
+    "allowedCategories": [
+      "inspiration",
+      "place"
+    ]
+  },
+  {
+    "id": "schedule-opening",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "城市博物馆",
+      "营业时间：每天9:00至17:00",
+      "地址：人民路20号"
+    ],
+    "accepted": true,
+    "category": "place",
+    "numeric": {}
+  },
+  {
+    "id": "schedule-parcel",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "包裹已到静安驿站",
+      "请凭8-3021领取包裹"
+    ],
+    "accepted": true,
+    "category": "delivery",
+    "numeric": {
+      "code": "8-3021"
+    }
+  },
+  {
+    "id": "schedule-food",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "街角咖啡",
+      "您的餐食已备好",
+      "取餐号 A057"
+    ],
+    "accepted": true,
+    "category": "pickup",
+    "numeric": {
+      "code": "A057"
+    }
+  },
+  {
+    "id": "schedule-payment",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "支付成功",
+      "商户：街角咖啡",
+      "实付金额：24.00",
+      "原价：100.00",
+      "优惠：20.00",
+      "余额：500.00"
+    ],
+    "accepted": true,
+    "category": "payment",
+    "numeric": {
+      "amount": "24.00"
+    },
+    "forbidden": {
+      "amount": [
+        "100.00",
+        "20.00",
+        "500.00"
+      ]
+    }
+  },
+  {
+    "id": "schedule-reference",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "摄影笔记",
+      "逆光人像用曝光补偿保留主体细节"
+    ],
+    "accepted": true,
+    "category": "learning",
+    "numeric": {}
+  }
+]

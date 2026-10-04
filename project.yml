@@ -1,0 +1,104 @@
+name: Sift
+options:
+  deploymentTarget:
+    iOS: '17.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    PRODUCT_BUNDLE_IDENTIFIER: com.sift.local
+    PRODUCT_NAME: $(TARGET_NAME)
+    SDKROOT: iphoneos
+    SUPPORTED_PLATFORMS: iphoneos iphonesimulator
+    IPHONEOS_DEPLOYMENT_TARGET: '17.0'
+    CLANG_ENABLE_MODULES: YES
+    SWIFT_OPTIMIZATION_LEVEL: '-Onone'
+    ALWAYS_SEARCH_USER_PATHS: NO
+  configs:
+    Debug:
+      ENABLE_TESTABILITY: YES
+      ONLY_ACTIVE_ARCH: YES
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+    Release:
+      SWIFT_OPTIMIZATION_LEVEL: '-O'
+packages:
+  MLXLM:
+    url: https://github.com/ml-explore/mlx-swift-lm
+    exactVersion: 3.32.3
+  Transformers:
+    url: https://github.com/huggingface/swift-transformers
+    exactVersion: 1.3.0
+targets:
+  Sift:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sift
+        excludes: [Resources, Info.plist, Sift.entitlements, SiftForeground.entitlements]
+      - path: Sift/Resources/LocalModel
+        type: folder
+        buildPhase: resources
+      - path: Sift/Resources/Licenses
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - package: MLXLM
+        product: MLXLLM
+      - package: MLXLM
+        product: MLXLMCommon
+      - package: MLXLM
+        product: MLXGuidedGeneration
+      - package: Transformers
+        product: Tokenizers
+    preBuildScripts:
+      - name: Verify bundled offline model
+        script: '/usr/bin/python3 "$SRCROOT/Scripts/prepare_local_model.py" --verify-only'
+        basedOnDependencyAnalysis: false
+    settings:
+      base:
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: $(SIFT_ENTITLEMENTS_PATH)
+        SIFT_ENTITLEMENTS_PATH: Sift/Sift.entitlements
+        SIFT_BACKGROUND_GPU_ENABLED: 'true'
+        INFOPLIST_FILE: Sift/Info.plist
+        SIFT_BUNDLE_ID: com.sift.local
+        PRODUCT_BUNDLE_IDENTIFIER: $(SIFT_BUNDLE_ID)
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Sift
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: '1,2'
+        SWIFT_EMIT_LOC_STRINGS: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "用于你主动选择的图片或指定时间段内的截图，内容在本机处理。"
+        INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription: "仅在你主动点击添加到日历时创建日程。"
+  SiftTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests]
+    dependencies:
+      - target: Sift
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.sift.local.tests
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/Sift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sift
+        BUNDLE_LOADER: $(TEST_HOST)
+  SiftUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [UITests]
+    dependencies:
+      - target: Sift
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.sift.local.uitests
+        TEST_TARGET_NAME: Sift
+
+schemes:
+  Sift:
+    build:
+      targets:
+        Sift: all
+    test:
+      targets: [SiftTests, SiftUITests]

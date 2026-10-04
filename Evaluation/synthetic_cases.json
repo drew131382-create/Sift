@@ -1,0 +1,842 @@
+[
+  {
+    "id": "synthetic-001",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "包裹已到达",
+      "请凭3-301领取包裹",
+      "菜鸟驿站"
+    ],
+    "accepted": true,
+    "category": "delivery",
+    "numeric": {
+      "code": "3-301"
+    }
+  },
+  {
+    "id": "synthetic-002",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "包裹已到达",
+      "请凭4-302领取包裹",
+      "顺丰自提点"
+    ],
+    "accepted": true,
+    "category": "delivery",
+    "numeric": {
+      "code": "4-302"
+    }
+  },
+  {
+    "id": "synthetic-003",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "包裹已到达",
+      "请凭5-303领取包裹",
+      "妈妈驿站"
+    ],
+    "accepted": true,
+    "category": "delivery",
+    "numeric": {
+      "code": "5-303"
+    }
+  },
+  {
+    "id": "synthetic-004",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "包裹已到达",
+      "请凭6-304领取包裹",
+      "学校收发室"
+    ],
+    "accepted": true,
+    "category": "delivery",
+    "numeric": {
+      "code": "6-304"
+    }
+  },
+  {
+    "id": "synthetic-005",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "包裹已到达",
+      "请凭7-305领取包裹",
+      "小区快递柜"
+    ],
+    "accepted": true,
+    "category": "delivery",
+    "numeric": {
+      "code": "7-305"
+    }
+  },
+  {
+    "id": "synthetic-006",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "街角咖啡",
+      "您的餐食已备好",
+      "取餐号 A057"
+    ],
+    "accepted": true,
+    "category": "pickup",
+    "numeric": {
+      "code": "A057"
+    }
+  },
+  {
+    "id": "synthetic-007",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "面包小屋",
+      "您的餐食已备好",
+      "取餐号 A058"
+    ],
+    "accepted": true,
+    "category": "pickup",
+    "numeric": {
+      "code": "A058"
+    }
+  },
+  {
+    "id": "synthetic-008",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "麦当劳",
+      "您的餐食已备好",
+      "取餐号 A059"
+    ],
+    "accepted": true,
+    "category": "pickup",
+    "numeric": {
+      "code": "A059"
+    }
+  },
+  {
+    "id": "synthetic-009",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "面馆",
+      "您的餐食已备好",
+      "取餐号 A060"
+    ],
+    "accepted": true,
+    "category": "pickup",
+    "numeric": {
+      "code": "A060"
+    }
+  },
+  {
+    "id": "synthetic-010",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "茶饮店",
+      "您的餐食已备好",
+      "取餐号 A061"
+    ],
+    "accepted": true,
+    "category": "pickup",
+    "numeric": {
+      "code": "A061"
+    }
+  },
+  {
+    "id": "synthetic-011",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "牙科复诊",
+      "预约详情",
+      "2026年10月3日 09:30",
+      "市口腔医院"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月3日 09:30"
+    }
+  },
+  {
+    "id": "synthetic-012",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "周末读书会",
+      "预约详情",
+      "2026年10月4日 14:00",
+      "社区图书馆"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月4日 14:00"
+    }
+  },
+  {
+    "id": "synthetic-013",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "高铁出行",
+      "预约详情",
+      "2026年10月5日 08:20",
+      "上海虹桥站"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月5日 08:20"
+    }
+  },
+  {
+    "id": "synthetic-014",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "音乐会",
+      "预约详情",
+      "2026年10月6日 19:30",
+      "城市音乐厅"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月6日 19:30"
+    }
+  },
+  {
+    "id": "synthetic-015",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "酒店入住",
+      "预约详情",
+      "2026年10月7日 15:00",
+      "西湖酒店"
+    ],
+    "accepted": true,
+    "category": "event",
+    "numeric": {
+      "eventTime": "2026年10月7日 15:00"
+    }
+  },
+  {
+    "id": "synthetic-016",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "支付成功",
+      "街角咖啡",
+      "原价 100.00",
+      "优惠 20.00",
+      "实际支付 24.00",
+      "账户余额 500.00"
+    ],
+    "accepted": true,
+    "category": "payment",
+    "numeric": {
+      "amount": "24.00"
+    }
+  },
+  {
+    "id": "synthetic-017",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "支付成功",
+      "便利店",
+      "原价 100.00",
+      "优惠 20.00",
+      "实际支付 25.00",
+      "账户余额 500.00"
+    ],
+    "accepted": true,
+    "category": "payment",
+    "numeric": {
+      "amount": "25.00"
+    }
+  },
+  {
+    "id": "synthetic-018",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "支付成功",
+      "书店",
+      "原价 100.00",
+      "优惠 20.00",
+      "实际支付 26.00",
+      "账户余额 500.00"
+    ],
+    "accepted": true,
+    "category": "payment",
+    "numeric": {
+      "amount": "26.00"
+    }
+  },
+  {
+    "id": "synthetic-019",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "支付成功",
+      "面馆",
+      "原价 100.00",
+      "优惠 20.00",
+      "实际支付 27.00",
+      "账户余额 500.00"
+    ],
+    "accepted": true,
+    "category": "payment",
+    "numeric": {
+      "amount": "27.00"
+    }
+  },
+  {
+    "id": "synthetic-020",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "支付成功",
+      "水果店",
+      "原价 100.00",
+      "优惠 20.00",
+      "实际支付 28.00",
+      "账户余额 500.00"
+    ],
+    "accepted": true,
+    "category": "payment",
+    "numeric": {
+      "amount": "28.00"
+    }
+  },
+  {
+    "id": "synthetic-021",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "订单详情",
+      "咖啡机",
+      "订单状态：待发货",
+      "实付金额：99.00"
+    ],
+    "accepted": true,
+    "category": "shopping",
+    "numeric": {
+      "amount": "99.00"
+    }
+  },
+  {
+    "id": "synthetic-022",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "订单详情",
+      "运动鞋",
+      "订单状态：待发货",
+      "实付金额：100.00"
+    ],
+    "accepted": true,
+    "category": "shopping",
+    "numeric": {
+      "amount": "100.00"
+    }
+  },
+  {
+    "id": "synthetic-023",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "订单详情",
+      "无线耳机",
+      "订单状态：待发货",
+      "实付金额：101.00"
+    ],
+    "accepted": true,
+    "category": "shopping",
+    "numeric": {
+      "amount": "101.00"
+    }
+  },
+  {
+    "id": "synthetic-024",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "订单详情",
+      "保温杯",
+      "订单状态：待发货",
+      "实付金额：102.00"
+    ],
+    "accepted": true,
+    "category": "shopping",
+    "numeric": {
+      "amount": "102.00"
+    }
+  },
+  {
+    "id": "synthetic-025",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "订单详情",
+      "台灯",
+      "订单状态：待发货",
+      "实付金额：103.00"
+    ],
+    "accepted": true,
+    "category": "shopping",
+    "numeric": {
+      "amount": "103.00"
+    }
+  },
+  {
+    "id": "synthetic-026",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "电子发票",
+      "发票号码 INV-2026-100",
+      "购买方 上海公司",
+      "开票方 办公用品商店"
+    ],
+    "accepted": true,
+    "category": "documentation",
+    "numeric": {
+      "documentReference": "INV-2026-100"
+    }
+  },
+  {
+    "id": "synthetic-027",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "电子发票",
+      "发票号码 INV-2026-101",
+      "购买方 上海公司",
+      "开票方 办公用品商店"
+    ],
+    "accepted": true,
+    "category": "documentation",
+    "numeric": {
+      "documentReference": "INV-2026-101"
+    }
+  },
+  {
+    "id": "synthetic-028",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "电子发票",
+      "发票号码 INV-2026-102",
+      "购买方 上海公司",
+      "开票方 办公用品商店"
+    ],
+    "accepted": true,
+    "category": "documentation",
+    "numeric": {
+      "documentReference": "INV-2026-102"
+    }
+  },
+  {
+    "id": "synthetic-029",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "电子发票",
+      "发票号码 INV-2026-103",
+      "购买方 上海公司",
+      "开票方 办公用品商店"
+    ],
+    "accepted": true,
+    "category": "documentation",
+    "numeric": {
+      "documentReference": "INV-2026-103"
+    }
+  },
+  {
+    "id": "synthetic-030",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "电子发票",
+      "发票号码 INV-2026-104",
+      "购买方 上海公司",
+      "开票方 办公用品商店"
+    ],
+    "accepted": true,
+    "category": "documentation",
+    "numeric": {
+      "documentReference": "INV-2026-104"
+    }
+  },
+  {
+    "id": "synthetic-031",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "矩阵学习笔记",
+      "矩阵乘法与特征值的计算方法",
+      "https://example.com/resource"
+    ],
+    "accepted": true,
+    "category": "learning",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-032",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "番茄炒蛋食谱",
+      "先炒鸡蛋，再炒番茄，合并翻炒",
+      "https://example.com/resource"
+    ],
+    "accepted": true,
+    "category": "learning",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-033",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "摄影教程",
+      "逆光人像的曝光补偿技巧",
+      "https://example.com/resource"
+    ],
+    "accepted": true,
+    "category": "learning",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-034",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "旅行书单",
+      "适合出发前阅读的五本旅行随笔",
+      "https://example.com/resource"
+    ],
+    "accepted": true,
+    "category": "learning",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-035",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "SwiftUI课程",
+      "理解状态绑定与视图更新",
+      "https://example.com/resource"
+    ],
+    "accepted": true,
+    "category": "learning",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-036",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "西湖",
+      "地点详情",
+      "地址：浙江省杭州市西湖区"
+    ],
+    "accepted": true,
+    "category": "place",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-037",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "上海图书馆",
+      "地点详情",
+      "地址：上海市淮海中路1555号"
+    ],
+    "accepted": true,
+    "category": "place",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-038",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "植物园",
+      "地点详情",
+      "地址：北京市海淀区香山路"
+    ],
+    "accepted": true,
+    "category": "place",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-039",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "博物馆",
+      "地点详情",
+      "地址：南京市中山东路321号"
+    ],
+    "accepted": true,
+    "category": "place",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-040",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "海边公园",
+      "地点详情",
+      "地址：厦门市环岛路"
+    ],
+    "accepted": true,
+    "category": "place",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-041",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "海边日落配色",
+      "橙色与蓝色的晚霞组合，适合做海报参考",
+      "收藏内容"
+    ],
+    "accepted": true,
+    "category": "inspiration",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-042",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "阅读摘录",
+      "慢下来观察生活中的小事",
+      "收藏内容"
+    ],
+    "accepted": true,
+    "category": "inspiration",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-043",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "房间布置灵感",
+      "原木书桌搭配暖色台灯",
+      "收藏内容"
+    ],
+    "accepted": true,
+    "category": "inspiration",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-044",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "周末拍照构图",
+      "前景树叶与远处山峰形成层次",
+      "收藏内容"
+    ],
+    "accepted": true,
+    "category": "inspiration",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-045",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "收藏的短诗",
+      "月光落在窗边，夜色安静如水",
+      "收藏内容"
+    ],
+    "accepted": true,
+    "category": "inspiration",
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-046",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-047",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "09:41",
+      "86%",
+      "123456"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-048",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "订单号：123456"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-049",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "微信",
+      "今天吃什么",
+      "火锅吧"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-050",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "微信",
+      "快递真慢"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-051",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "微信",
+      "付款成功了吗",
+      "还没呢"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-052",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "设置",
+      "通知",
+      "隐私"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-053",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "首页",
+      "推荐",
+      "关注",
+      "点赞",
+      "收藏"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-054",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "欢迎使用",
+      "点击继续"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-055",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "账户余额：500.00"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-056",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "原价：100.00",
+      "优惠：20.00"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-057",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "手机号：13812345678"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-058",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "订单时间：2026年10月2日 09:41"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-059",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "微信",
+      "明天有空吗",
+      "再说吧"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  },
+  {
+    "id": "synthetic-060",
+    "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+    "lines": [
+      "验证码：123456"
+    ],
+    "accepted": false,
+    "category": null,
+    "numeric": {}
+  }
+]

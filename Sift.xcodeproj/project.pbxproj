@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21D012DB599B877A343D071D /* RecognitionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3028EC3D6ED712B0258FCB7 /* RecognitionPolicy.swift */; };
+		4559BA34F688288543DA22AF /* MLXLLM in Frameworks */ = {isa = PBXBuildFile; productRef = 3397F4CF4B7BE11A712E4AF1 /* MLXLLM */; };
+		496C9EB10D08181D32F556FD /* SemanticDeviceSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E13FA26288533605E5A15E5 /* SemanticDeviceSmokeTests.swift */; };
+		5BCA0A5911E2DDF460386148 /* ScreenshotViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C511DECE8918627BBB82395C /* ScreenshotViewer.swift */; };
+		626D9FF86D2A08D9EFA3058C /* GroundedExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5115045E9D6EE71692406259 /* GroundedExtractionTests.swift */; };
+		630D6232F858E2E755F3CE62 /* SiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C500888A6085BCD2AF0E9972 /* SiftApp.swift */; };
+		8A7CD4C08B0667C1AAD561C0 /* SemanticExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2A41CBACFEABD45B0FA358 /* SemanticExtractionTests.swift */; };
+		8B0FD822EE23EB88EE8EC08A /* LocalModelBundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACEA4DCCDF34697011660CE /* LocalModelBundleTests.swift */; };
+		8E3270A20EAF510CF48B339E /* PreviewLaunchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B329041111F611FE5FBC6EF /* PreviewLaunchOptions.swift */; };
+		9457AE07AA431A548D8D6EB6 /* ScheduleAdmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED24EFB928BF45668344C88D /* ScheduleAdmissionTests.swift */; };
+		95288C04F43523CB777EC7DC /* MLXGuidedGeneration in Frameworks */ = {isa = PBXBuildFile; productRef = 480E9F0E8B0D4379DA87257D /* MLXGuidedGeneration */; };
+		9815C94D36A052772D1BD671 /* BackgroundScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62C418F2C2051DABD787E8 /* BackgroundScan.swift */; };
+		98E3811B5E7AF29E9BC45E7B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8742367C8DB3F360837578A2 /* SettingsView.swift */; };
+		AEEB7D53D8B575F97EAE7192 /* ScreenshotScanSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AFC754325F159E0E42B2 /* ScreenshotScanSheet.swift */; };
+		B5B63281F4582D531D11AA03 /* ScreenshotScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C66D25DBD8F79CFE0F401B /* ScreenshotScan.swift */; };
+		B71801DFB7787138FBEAEE3F /* CardStackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB835D7C5D5523922D38E77 /* CardStackUITests.swift */; };
+		BB70385CD53B0213AE48C7D6 /* SiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6BCF7344DEDF0DFDDF6FB6 /* SiftTests.swift */; };
+		BC8E9297D39429AD398BE399 /* GroundedExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF79F41F71AEC33503929A7 /* GroundedExtraction.swift */; };
+		BE22273E58F341AD877BABBD /* FocusedScanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC80E3BF15B738608510D5C /* FocusedScanTests.swift */; };
+		C78E685F2E61F28735DA25F8 /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = CD7A567172FE44C165102A44 /* Licenses */; };
+		C7F218D25C2B18F490ABAF5E /* SemanticExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55515C493C9F6F6A4BDE7DD5 /* SemanticExtraction.swift */; };
+		CA3DD94DF4C34461CD5D8C52 /* LocalServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82139990C66288B387F93D /* LocalServices.swift */; };
+		CD6A8487D04A7091DE262219 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D23C8DF868C80269DDE9F /* Domain.swift */; };
+		D3F31E5820D8B29722D3A1AA /* ScanRangeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14893D10273A533508DA451 /* ScanRangeUITests.swift */; };
+		D7480F7B26A74F3C63F4BBC3 /* MLXLMCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 21D79B16584FBF55FA36B34B /* MLXLMCommon */; };
+		D7EF36C51D2EDA16094CAD41 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8124A6F6D41BCDFF28BAC5BA /* DesignSystem.swift */; };
+		D9F4AB0EF56FF26BE828401F /* LocalModel in Resources */ = {isa = PBXBuildFile; fileRef = B8FFA375C8B383D4C241165C /* LocalModel */; };
+		DEBD443B52F95F9842A7F523 /* LocalModelEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A40F319BE90CB406938E6A /* LocalModelEngine.swift */; };
+		DFD0B0E9EBF2D2D3539E4082 /* SelectionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344B356A3EC52AF12AA8704E /* SelectionInput.swift */; };
+		DFFF698A2DF4EEFD437036D8 /* ScheduleAdmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9671CEC4CD79CF2C1EBA18CA /* ScheduleAdmission.swift */; };
+		E28E5E15EA77284F34B747EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08B127D3491D0E77696F1D55 /* Assets.xcassets */; };
+		E2A50EF7A763338470C82AF6 /* CardStacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99B0AC86E5EDBFDA7B44B48 /* CardStacks.swift */; };
+		F2A86895DB3EFAB6D0958708 /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = FFEFC2763460564A717636B7 /* Tokenizers */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55F6CD0EF3039E8E4F054886 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF5A71E18F356690F069FA36 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E76B955C8BCD08241D6FF961;
+			remoteInfo = Sift;
+		};
+		97D6F87A5468B30F0D2AAE07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF5A71E18F356690F069FA36 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E76B955C8BCD08241D6FF961;
+			remoteInfo = Sift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08B127D3491D0E77696F1D55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2D6BCF7344DEDF0DFDDF6FB6 /* SiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiftTests.swift; sourceTree = "<group>"; };
+		344B356A3EC52AF12AA8704E /* SelectionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionInput.swift; sourceTree = "<group>"; };
+		395D23C8DF868C80269DDE9F /* Domain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
+		3E13FA26288533605E5A15E5 /* SemanticDeviceSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticDeviceSmokeTests.swift; sourceTree = "<group>"; };
+		5115045E9D6EE71692406259 /* GroundedExtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundedExtractionTests.swift; sourceTree = "<group>"; };
+		55515C493C9F6F6A4BDE7DD5 /* SemanticExtraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticExtraction.swift; sourceTree = "<group>"; };
+		5C0F501AEE4B2A0B5BDE6D92 /* SiftUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ACEA4DCCDF34697011660CE /* LocalModelBundleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalModelBundleTests.swift; sourceTree = "<group>"; };
+		73A4AFC754325F159E0E42B2 /* ScreenshotScanSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotScanSheet.swift; sourceTree = "<group>"; };
+		74A40F319BE90CB406938E6A /* LocalModelEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalModelEngine.swift; sourceTree = "<group>"; };
+		8124A6F6D41BCDFF28BAC5BA /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		8742367C8DB3F360837578A2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8CEFE07E40B5883E33B09911 /* SiftTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9671CEC4CD79CF2C1EBA18CA /* ScheduleAdmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAdmission.swift; sourceTree = "<group>"; };
+		9AC80E3BF15B738608510D5C /* FocusedScanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedScanTests.swift; sourceTree = "<group>"; };
+		9B329041111F611FE5FBC6EF /* PreviewLaunchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLaunchOptions.swift; sourceTree = "<group>"; };
+		9E82139990C66288B387F93D /* LocalServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalServices.swift; sourceTree = "<group>"; };
+		B8FFA375C8B383D4C241165C /* LocalModel */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LocalModel; path = Sift/Resources/LocalModel; sourceTree = SOURCE_ROOT; };
+		BB2A41CBACFEABD45B0FA358 /* SemanticExtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticExtractionTests.swift; sourceTree = "<group>"; };
+		C500888A6085BCD2AF0E9972 /* SiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiftApp.swift; sourceTree = "<group>"; };
+		C511DECE8918627BBB82395C /* ScreenshotViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotViewer.swift; sourceTree = "<group>"; };
+		C99B0AC86E5EDBFDA7B44B48 /* CardStacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStacks.swift; sourceTree = "<group>"; };
+		CD7A567172FE44C165102A44 /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Licenses; path = Sift/Resources/Licenses; sourceTree = SOURCE_ROOT; };
+		CFB835D7C5D5523922D38E77 /* CardStackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackUITests.swift; sourceTree = "<group>"; };
+		D0A82EFF95D94FE10F5901DB /* Sift.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Sift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3028EC3D6ED712B0258FCB7 /* RecognitionPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionPolicy.swift; sourceTree = "<group>"; };
+		D3C66D25DBD8F79CFE0F401B /* ScreenshotScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotScan.swift; sourceTree = "<group>"; };
+		E14893D10273A533508DA451 /* ScanRangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanRangeUITests.swift; sourceTree = "<group>"; };
+		ECF79F41F71AEC33503929A7 /* GroundedExtraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundedExtraction.swift; sourceTree = "<group>"; };
+		ED24EFB928BF45668344C88D /* ScheduleAdmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAdmissionTests.swift; sourceTree = "<group>"; };
+		FA62C418F2C2051DABD787E8 /* BackgroundScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundScan.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B71A9D2E534F321CC5248C16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4559BA34F688288543DA22AF /* MLXLLM in Frameworks */,
+				D7480F7B26A74F3C63F4BBC3 /* MLXLMCommon in Frameworks */,
+				95288C04F43523CB777EC7DC /* MLXGuidedGeneration in Frameworks */,
+				F2A86895DB3EFAB6D0958708 /* Tokenizers in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		45CA59FC210B6C618C2FB69C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0A82EFF95D94FE10F5901DB /* Sift.app */,
+				8CEFE07E40B5883E33B09911 /* SiftTests.xctest */,
+				5C0F501AEE4B2A0B5BDE6D92 /* SiftUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		471D4825D8CDC0FF2969BDC9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9AC80E3BF15B738608510D5C /* FocusedScanTests.swift */,
+				5115045E9D6EE71692406259 /* GroundedExtractionTests.swift */,
+				6ACEA4DCCDF34697011660CE /* LocalModelBundleTests.swift */,
+				ED24EFB928BF45668344C88D /* ScheduleAdmissionTests.swift */,
+				3E13FA26288533605E5A15E5 /* SemanticDeviceSmokeTests.swift */,
+				BB2A41CBACFEABD45B0FA358 /* SemanticExtractionTests.swift */,
+				2D6BCF7344DEDF0DFDDF6FB6 /* SiftTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		80BEB6F2D6D3A5224C60F3E4 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				CFB835D7C5D5523922D38E77 /* CardStackUITests.swift */,
+				E14893D10273A533508DA451 /* ScanRangeUITests.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		D852F6552D37B1F8043D7CEB = {
+			isa = PBXGroup;
+			children = (
+				CD7A567172FE44C165102A44 /* Licenses */,
+				B8FFA375C8B383D4C241165C /* LocalModel */,
+				F98CE90785F999E3B584CF1B /* Sift */,
+				471D4825D8CDC0FF2969BDC9 /* Tests */,
+				80BEB6F2D6D3A5224C60F3E4 /* UITests */,
+				45CA59FC210B6C618C2FB69C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F98CE90785F999E3B584CF1B /* Sift */ = {
+			isa = PBXGroup;
+			children = (
+				08B127D3491D0E77696F1D55 /* Assets.xcassets */,
+				FA62C418F2C2051DABD787E8 /* BackgroundScan.swift */,
+				C99B0AC86E5EDBFDA7B44B48 /* CardStacks.swift */,
+				8124A6F6D41BCDFF28BAC5BA /* DesignSystem.swift */,
+				395D23C8DF868C80269DDE9F /* Domain.swift */,
+				ECF79F41F71AEC33503929A7 /* GroundedExtraction.swift */,
+				74A40F319BE90CB406938E6A /* LocalModelEngine.swift */,
+				9E82139990C66288B387F93D /* LocalServices.swift */,
+				9B329041111F611FE5FBC6EF /* PreviewLaunchOptions.swift */,
+				D3028EC3D6ED712B0258FCB7 /* RecognitionPolicy.swift */,
+				9671CEC4CD79CF2C1EBA18CA /* ScheduleAdmission.swift */,
+				D3C66D25DBD8F79CFE0F401B /* ScreenshotScan.swift */,
+				73A4AFC754325F159E0E42B2 /* ScreenshotScanSheet.swift */,
+				C511DECE8918627BBB82395C /* ScreenshotViewer.swift */,
+				344B356A3EC52AF12AA8704E /* SelectionInput.swift */,
+				55515C493C9F6F6A4BDE7DD5 /* SemanticExtraction.swift */,
+				8742367C8DB3F360837578A2 /* SettingsView.swift */,
+				C500888A6085BCD2AF0E9972 /* SiftApp.swift */,
+			);
+			path = Sift;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5F3FF16262E59317491C2595 /* SiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B07A931D0C28EC41D0C5E54 /* Build configuration list for PBXNativeTarget "SiftTests" */;
+			buildPhases = (
+				B560F467DC6AC90A333E2AC1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A65EB8A0F67E21EA155A8E55 /* PBXTargetDependency */,
+			);
+			name = SiftTests;
+			packageProductDependencies = (
+			);
+			productName = SiftTests;
+			productReference = 8CEFE07E40B5883E33B09911 /* SiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		604F278E6411CE6488EE956C /* SiftUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2DC6F1E8D2C8B4F8967A91F /* Build configuration list for PBXNativeTarget "SiftUITests" */;
+			buildPhases = (
+				1F6586A7AF9DC38E809E1C1E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				913FF8CDD9AE5ECCD52389F7 /* PBXTargetDependency */,
+			);
+			name = SiftUITests;
+			packageProductDependencies = (
+			);
+			productName = SiftUITests;
+			productReference = 5C0F501AEE4B2A0B5BDE6D92 /* SiftUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		E76B955C8BCD08241D6FF961 /* Sift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 287BE5D5D56E665411D453C7 /* Build configuration list for PBXNativeTarget "Sift" */;
+			buildPhases = (
+				D26FD7D722C7C4A008C5D485 /* Verify bundled offline model */,
+				0195E17015D9C5525CBA2516 /* Sources */,
+				DBCD5A16D67F2DABCCAC79FE /* Resources */,
+				B71A9D2E534F321CC5248C16 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sift;
+			packageProductDependencies = (
+				3397F4CF4B7BE11A712E4AF1 /* MLXLLM */,
+				21D79B16584FBF55FA36B34B /* MLXLMCommon */,
+				480E9F0E8B0D4379DA87257D /* MLXGuidedGeneration */,
+				FFEFC2763460564A717636B7 /* Tokenizers */,
+			);
+			productName = Sift;
+			productReference = D0A82EFF95D94FE10F5901DB /* Sift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DF5A71E18F356690F069FA36 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					604F278E6411CE6488EE956C = {
+						TestTargetID = E76B955C8BCD08241D6FF961;
+					};
+					E76B955C8BCD08241D6FF961 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 26CDFAA764C4528BC7582626 /* Build configuration list for PBXProject "Sift" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D852F6552D37B1F8043D7CEB;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A109773BF11A1BB5E8BE2038 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */,
+				75D854ACF0742D6D6EE7392F /* XCRemoteSwiftPackageReference "swift-transformers" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 45CA59FC210B6C618C2FB69C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E76B955C8BCD08241D6FF961 /* Sift */,
+				5F3FF16262E59317491C2595 /* SiftTests */,
+				604F278E6411CE6488EE956C /* SiftUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DBCD5A16D67F2DABCCAC79FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E28E5E15EA77284F34B747EA /* Assets.xcassets in Resources */,
+				C78E685F2E61F28735DA25F8 /* Licenses in Resources */,
+				D9F4AB0EF56FF26BE828401F /* LocalModel in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D26FD7D722C7C4A008C5D485 /* Verify bundled offline model */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Verify bundled offline model";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"$SRCROOT/Scripts/prepare_local_model.py\" --verify-only";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0195E17015D9C5525CBA2516 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9815C94D36A052772D1BD671 /* BackgroundScan.swift in Sources */,
+				E2A50EF7A763338470C82AF6 /* CardStacks.swift in Sources */,
+				D7EF36C51D2EDA16094CAD41 /* DesignSystem.swift in Sources */,
+				CD6A8487D04A7091DE262219 /* Domain.swift in Sources */,
+				BC8E9297D39429AD398BE399 /* GroundedExtraction.swift in Sources */,
+				DEBD443B52F95F9842A7F523 /* LocalModelEngine.swift in Sources */,
+				CA3DD94DF4C34461CD5D8C52 /* LocalServices.swift in Sources */,
+				8E3270A20EAF510CF48B339E /* PreviewLaunchOptions.swift in Sources */,
+				21D012DB599B877A343D071D /* RecognitionPolicy.swift in Sources */,
+				DFFF698A2DF4EEFD437036D8 /* ScheduleAdmission.swift in Sources */,
+				B5B63281F4582D531D11AA03 /* ScreenshotScan.swift in Sources */,
+				AEEB7D53D8B575F97EAE7192 /* ScreenshotScanSheet.swift in Sources */,
+				5BCA0A5911E2DDF460386148 /* ScreenshotViewer.swift in Sources */,
+				DFD0B0E9EBF2D2D3539E4082 /* SelectionInput.swift in Sources */,
+				C7F218D25C2B18F490ABAF5E /* SemanticExtraction.swift in Sources */,
+				98E3811B5E7AF29E9BC45E7B /* SettingsView.swift in Sources */,
+				630D6232F858E2E755F3CE62 /* SiftApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F6586A7AF9DC38E809E1C1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B71801DFB7787138FBEAEE3F /* CardStackUITests.swift in Sources */,
+				D3F31E5820D8B29722D3A1AA /* ScanRangeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B560F467DC6AC90A333E2AC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE22273E58F341AD877BABBD /* FocusedScanTests.swift in Sources */,
+				626D9FF86D2A08D9EFA3058C /* GroundedExtractionTests.swift in Sources */,
+				8B0FD822EE23EB88EE8EC08A /* LocalModelBundleTests.swift in Sources */,
+				9457AE07AA431A548D8D6EB6 /* ScheduleAdmissionTests.swift in Sources */,
+				496C9EB10D08181D32F556FD /* SemanticDeviceSmokeTests.swift in Sources */,
+				8A7CD4C08B0667C1AAD561C0 /* SemanticExtractionTests.swift in Sources */,
+				BB70385CD53B0213AE48C7D6 /* SiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		913FF8CDD9AE5ECCD52389F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E76B955C8BCD08241D6FF961 /* Sift */;
+			targetProxy = 97D6F87A5468B30F0D2AAE07 /* PBXContainerItemProxy */;
+		};
+		A65EB8A0F67E21EA155A8E55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E76B955C8BCD08241D6FF961 /* Sift */;
+			targetProxy = 55F6CD0EF3039E8E4F054886 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1CF81597A9DD12C68442C36B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "$(SIFT_ENTITLEMENTS_PATH)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sift/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Sift;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "仅在你主动点击添加到日历时创建日程。";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "用于你主动选择的图片或指定时间段内的截图，内容在本机处理。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(SIFT_BUNDLE_ID)";
+				SIFT_BACKGROUND_GPU_ENABLED = YES;
+				SIFT_BUNDLE_ID = com.sift.local;
+				SIFT_ENTITLEMENTS_PATH = Sift/Sift.entitlements;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		541F28A9B75A8EBF3F6B8AD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sift.local.tests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sift";
+			};
+			name = Debug;
+		};
+		7DC55ED1735A9ED22804062B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sift.local.uitests;
+				TEST_TARGET_NAME = Sift;
+			};
+			name = Release;
+		};
+		89A2EA77B80E610BB0F2D29A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sift.local;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		8BE718C3B70164FAB40716FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sift.local.uitests;
+				TEST_TARGET_NAME = Sift;
+			};
+			name = Debug;
+		};
+		DF6C4A37C171C349234402BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_TESTABILITY = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sift.local;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		EE12E920B9F289A5FCFDACA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sift.local.tests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sift";
+			};
+			name = Release;
+		};
+		F5AB11CB77DB2BA00FEC1ADC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "$(SIFT_ENTITLEMENTS_PATH)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sift/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Sift;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "仅在你主动点击添加到日历时创建日程。";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "用于你主动选择的图片或指定时间段内的截图，内容在本机处理。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(SIFT_BUNDLE_ID)";
+				SIFT_BACKGROUND_GPU_ENABLED = YES;
+				SIFT_BUNDLE_ID = com.sift.local;
+				SIFT_ENTITLEMENTS_PATH = Sift/Sift.entitlements;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		26CDFAA764C4528BC7582626 /* Build configuration list for PBXProject "Sift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF6C4A37C171C349234402BA /* Debug */,
+				89A2EA77B80E610BB0F2D29A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		287BE5D5D56E665411D453C7 /* Build configuration list for PBXNativeTarget "Sift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CF81597A9DD12C68442C36B /* Debug */,
+				F5AB11CB77DB2BA00FEC1ADC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3B07A931D0C28EC41D0C5E54 /* Build configuration list for PBXNativeTarget "SiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				541F28A9B75A8EBF3F6B8AD4 /* Debug */,
+				EE12E920B9F289A5FCFDACA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F2DC6F1E8D2C8B4F8967A91F /* Build configuration list for PBXNativeTarget "SiftUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BE718C3B70164FAB40716FB /* Debug */,
+				7DC55ED1735A9ED22804062B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		75D854ACF0742D6D6EE7392F /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-transformers";
+			requirement = {
+				kind = exactVersion;
+				version = 1.3.0;
+			};
+		};
+		A109773BF11A1BB5E8BE2038 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ml-explore/mlx-swift-lm";
+			requirement = {
+				kind = exactVersion;
+				version = 3.32.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		21D79B16584FBF55FA36B34B /* MLXLMCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A109773BF11A1BB5E8BE2038 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
+			productName = MLXLMCommon;
+		};
+		3397F4CF4B7BE11A712E4AF1 /* MLXLLM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A109773BF11A1BB5E8BE2038 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
+			productName = MLXLLM;
+		};
+		480E9F0E8B0D4379DA87257D /* MLXGuidedGeneration */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A109773BF11A1BB5E8BE2038 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
+			productName = MLXGuidedGeneration;
+		};
+		FFEFC2763460564A717636B7 /* Tokenizers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75D854ACF0742D6D6EE7392F /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Tokenizers;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = DF5A71E18F356690F069FA36 /* Project object */;
+}

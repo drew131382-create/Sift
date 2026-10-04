@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-10-03T14:25:49.918293+08:00",
+  "policy": "qwen3-0.6b-mlx-4bit-173234aa840d113125e9f2271100ddbaf16c9620/prompt-v10/validator-v7",
+  "realScreenshots": 0,
+  "syntheticTextFixtures": 22,
+  "unitTests": {
+    "total": 73,
+    "passed": 72,
+    "skipped": 1,
+    "failed": 0
+  },
+  "simulatorBuild": "passed",
+  "unsignedIPhoneBuild": "passed",
+  "signedIPhoneBuild": "blocked: No Accounts / missing Background GPU Access entitlement",
+  "sourceSHA256": {
+    "Sift/SemanticExtraction.swift": "1457a0c0c00d6060253bae85878b659ea48401a07558e6361572b67e2a507654",
+    "Sift/ScheduleAdmission.swift": "b0de288e413a46e98b62757ccb45e82343419592854f23cdb9e4065840076f55",
+    "Sift/LocalModelEngine.swift": "b2e39d2279ed154d8f59eb2fd1a726bf062cf4e3750644f1e9246f799f1493ca",
+    "Tests/ScheduleAdmissionTests.swift": "2e7d7455f5542ad6304edaffe825311b308c8b4339531c036d3138c54ae7cef1",
+    "Tests/SemanticExtractionTests.swift": "a96d2239e3f17b65f7f08f1c4d9a54bfdb0eacb075e35fa05f3e3c0b14bfd54b",
+    "Evaluation/Runner.swift": "adfbe540b0fafb6538dc0ed52d02ebdb3f7a90ebfb165c811b9cbc11f71103c7",
+    "Evaluation/schedule_cases.json": "fc6eb537d31ecf06b267db100200cd3c5bfe20691c779e3cebc6450e1690996c"
+  }
+}

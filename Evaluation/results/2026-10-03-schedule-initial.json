@@ -1,0 +1,402 @@
+[
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-question",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 8.045683026313782,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-invite",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 2.5907360315322876,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-idea",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 0.7768269777297974,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-pending",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 0.9665409326553345,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-cancelled",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 0.7853699922561646,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-news",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 0.767069935798645,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-order-date",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.3369290828704834,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-status",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.8091670274734497,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : false,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-notice",
+    "numericCorrect" : 0,
+    "numericTotal" : 1,
+    "seconds" : 7.421286940574646,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : false,
+    "fields" : {
+      "eventTime" : "10月5日上午10点",
+      "location" : "县医院"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-implicit-clinic",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 10.08564293384552,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : false,
+    "fields" : {
+      "eventName" : "牙科复诊",
+      "eventTime" : "2026年10月5日09:30",
+      "location" : "市口腔医院"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-booking",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 7.270720958709717,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : false,
+    "fields" : {
+      "merchant" : "电子车票"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-rail",
+    "numericCorrect" : 0,
+    "numericTotal" : 1,
+    "seconds" : 7.553196907043457,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : false,
+    "fields" : {
+      "eventTime" : "2026年10月5日15:00"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-hotel",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 9.840541005134583,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "牙科复诊"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-missing-time",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 23.99202799797058,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : false,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-question-beside-booking",
+    "numericCorrect" : 0,
+    "numericTotal" : 1,
+    "seconds" : 9.698637008666992,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-conflict",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 8.473083972930908,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : false,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-poster",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 7.22255003452301,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : false,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-opening",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 12.449964046478271,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "8-3021"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-parcel",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 6.799491047859192,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : false,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-food",
+    "numericCorrect" : 0,
+    "numericTotal" : 1,
+    "seconds" : 2.2302989959716797,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "24.00",
+      "merchant" : "街角咖啡"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-payment",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 10.460314989089966,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : false,
+    "fields" : {
+      "merchant" : "摄影笔记"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-reference",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.273362040519714,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  }
+]

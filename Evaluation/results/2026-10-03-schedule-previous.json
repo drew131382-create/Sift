@@ -1,0 +1,414 @@
+[
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-question",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 2.7717820405960083,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-invite",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.1672899723052979,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-idea",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 15.561616897583008,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-pending",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.0915590524673462,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-cancelled",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 15.52248501777649,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-news",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 13.716562986373901,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-order-date",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.3229550123214722,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-status",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.1784520149230957,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "会议定在明天下午三点",
+      "eventTime" : "明天下午三点"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-notice",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 7.305440068244934,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "皮肤科复诊",
+      "eventTime" : "10月5日上午10点",
+      "location" : "县医院"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-implicit-clinic",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 18.306894063949585,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "牙科复诊",
+      "eventTime" : "2026年10月5日09:30",
+      "location" : "市口腔医院"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-booking",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 15.694870948791504,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "G123 高铁出行",
+      "eventTime" : "2026年10月5日08:20",
+      "location" : "上海虹桥站"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-rail",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 22.63450002670288,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "西湖酒店",
+      "eventTime" : "2026年10月5日15:00"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-hotel",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 14.29083001613617,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "牙科复诊预约已确认"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-missing-time",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 21.204584002494812,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "牙科复诊预约已确认",
+      "eventTime" : "2026年10月5日09:30",
+      "excerpt" : "需要带什么材料？"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-question-beside-booking",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 25.970635890960693,
+    "state" : "pending",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "event",
+    "decisionCorrect" : true,
+    "fields" : {
+      "eventName" : "牙科复诊预约已确认"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-conflict",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 16.336257100105286,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "place",
+    "decisionCorrect" : true,
+    "fields" : {
+      "location" : "城市公园",
+      "venue" : "城市音乐节"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-poster",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 10.145205020904541,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : false,
+    "decisionCorrect" : false,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-opening",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 1.788915991783142,
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : true,
+    "fields" : {
+      "code" : "8-3021"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-parcel",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 5.514876008033752,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "delivery",
+    "decisionCorrect" : false,
+    "fields" : {
+      "code" : "A057"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-food",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 4.501422047615051,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "payment",
+    "decisionCorrect" : true,
+    "fields" : {
+      "amount" : "24.00",
+      "merchant" : "街角咖啡"
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-payment",
+    "numericCorrect" : 1,
+    "numericTotal" : 1,
+    "seconds" : 10.072934031486511,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  },
+  {
+    "accepted" : true,
+    "category" : "learning",
+    "decisionCorrect" : true,
+    "fields" : {
+
+    },
+    "forbiddenViolations" : [
+
+    ],
+    "id" : "schedule-reference",
+    "numericCorrect" : 0,
+    "numericTotal" : 0,
+    "seconds" : 5.0582979917526245,
+    "state" : "needsReview",
+    "unexpectedNumeric" : [
+
+    ]
+  }
+]

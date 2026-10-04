@@ -1,0 +1,28 @@
+[
+  {
+    "accepted": false,
+    "decisionCorrect": false,
+    "fields": {},
+    "forbiddenViolations": [],
+    "id": "schedule-opening",
+    "numericCorrect": 0,
+    "numericTotal": 0,
+    "seconds": 1.7379449605941772,
+    "unexpectedNumeric": []
+  },
+  {
+    "accepted": true,
+    "category": "delivery",
+    "decisionCorrect": false,
+    "fields": {
+      "code": "A057"
+    },
+    "forbiddenViolations": [],
+    "id": "schedule-food",
+    "numericCorrect": 1,
+    "numericTotal": 1,
+    "seconds": 4.405650019645691,
+    "state": "needsReview",
+    "unexpectedNumeric": []
+  }
+]

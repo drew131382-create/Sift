@@ -1,0 +1,15 @@
+{
+  "decisionAccuracy" : 0.90909090909090906,
+  "decisionCorrect" : 20,
+  "forbiddenViolations" : 0,
+  "mlxPeakBytes" : 1023683720,
+  "numericAccuracyIncludingUnexpected" : 1,
+  "numericCorrect" : 9,
+  "numericExpected" : 9,
+  "passed" : false,
+  "platform" : "macOS; iPhone timing and memory require device validation",
+  "policy" : "qwen3-0.6b-mlx-4bit-173234aa840d113125e9f2271100ddbaf16c9620\/prompt-v10\/validator-v7",
+  "realScreenshotAcceptance" : false,
+  "samples" : 22,
+  "unexpectedNumeric" : 0
+}

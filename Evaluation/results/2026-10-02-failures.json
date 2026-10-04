@@ -1,0 +1,149 @@
+[
+  {
+    "input": {
+      "id": "synthetic-012",
+      "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+      "lines": [
+        "09:41",
+        "周末读书会",
+        "预约详情",
+        "2026年10月4日 14:00",
+        "社区图书馆"
+      ],
+      "accepted": true,
+      "category": "event",
+      "numeric": {
+        "eventTime": "2026年10月4日 14:00"
+      }
+    },
+    "result": {
+      "accepted": false,
+      "decisionCorrect": false,
+      "error": "本地理解结果不完整，请重试。",
+      "fields": {},
+      "forbiddenViolations": [],
+      "id": "synthetic-012",
+      "numericCorrect": 0,
+      "numericTotal": 1,
+      "seconds": 10.306886911392212,
+      "unexpectedNumeric": []
+    }
+  },
+  {
+    "input": {
+      "id": "synthetic-013",
+      "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+      "lines": [
+        "09:41",
+        "高铁出行",
+        "预约详情",
+        "2026年10月5日 08:20",
+        "上海虹桥站"
+      ],
+      "accepted": true,
+      "category": "event",
+      "numeric": {
+        "eventTime": "2026年10月5日 08:20"
+      }
+    },
+    "result": {
+      "accepted": false,
+      "decisionCorrect": false,
+      "fields": {},
+      "forbiddenViolations": [],
+      "id": "synthetic-013",
+      "numericCorrect": 0,
+      "numericTotal": 1,
+      "seconds": 1.4266899824142456,
+      "unexpectedNumeric": []
+    }
+  },
+  {
+    "input": {
+      "id": "synthetic-033",
+      "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+      "lines": [
+        "09:41",
+        "摄影教程",
+        "逆光人像的曝光补偿技巧",
+        "https://example.com/resource"
+      ],
+      "accepted": true,
+      "category": "learning",
+      "numeric": {}
+    },
+    "result": {
+      "accepted": true,
+      "category": "inspiration",
+      "decisionCorrect": false,
+      "fields": {
+        "excerpt": "摄影教程 逆光人像的曝光补偿技巧 https://example.com/resource"
+      },
+      "forbiddenViolations": [],
+      "id": "synthetic-033",
+      "numericCorrect": 0,
+      "numericTotal": 0,
+      "seconds": 5.59711492061615,
+      "state": "pending",
+      "unexpectedNumeric": []
+    }
+  },
+  {
+    "input": {
+      "id": "synthetic-035",
+      "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+      "lines": [
+        "09:41",
+        "SwiftUI课程",
+        "理解状态绑定与视图更新",
+        "https://example.com/resource"
+      ],
+      "accepted": true,
+      "category": "learning",
+      "numeric": {}
+    },
+    "result": {
+      "accepted": true,
+      "category": "inspiration",
+      "decisionCorrect": false,
+      "fields": {
+        "excerpt": "SwiftUI课程 理解状态绑定与视图更新 https://example.com/resource"
+      },
+      "forbiddenViolations": [],
+      "id": "synthetic-035",
+      "numericCorrect": 0,
+      "numericTotal": 0,
+      "seconds": 5.189098954200745,
+      "state": "needsReview",
+      "unexpectedNumeric": []
+    }
+  },
+  {
+    "input": {
+      "id": "synthetic-056",
+      "origin": "generated-text-fixture-not-real-screenshot-or-human-annotation",
+      "lines": [
+        "原价：100.00",
+        "优惠：20.00"
+      ],
+      "accepted": false,
+      "category": null,
+      "numeric": {}
+    },
+    "result": {
+      "accepted": true,
+      "category": "payment",
+      "decisionCorrect": false,
+      "fields": {
+        "merchant": "100.00"
+      },
+      "forbiddenViolations": [],
+      "id": "synthetic-056",
+      "numericCorrect": 0,
+      "numericTotal": 0,
+      "seconds": 7.116207003593445,
+      "state": "needsReview",
+      "unexpectedNumeric": []
+    }
+  }
+]
