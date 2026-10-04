@@ -1,0 +1,31 @@
+.build/
+.DS_Store
+*.profraw
+Sift/Resources/LocalModel/*.partial
+
+# Local build products and editor state
+DerivedData/
+build/
+__pycache__/
+*.py[cod]
+xcuserdata/
+*.xcuserstate
+*.ipa
+*.app/
+*.dSYM/
+
+# Model weights are prepared locally, not committed to the code repository
+*.safetensors
+*.gguf
+*.mlmodelc/
+*.mlpackage/
+
+# User screenshot annotations and machine credentials remain local
+Scripts/Training/qwen_manual_labels_*.tsv
+.env
+.env.*
+!.env.example
+*.mobileprovision
+*.p12
+*.pfx
+*.key
