@@ -26,11 +26,11 @@ enum Category: String, Codable, CaseIterable, Hashable {
         case .place: return "地点 / 旅行"
         case .learning: return "学习 / 资料"
         case .health: return "健康"
-        case .social: return "社交 / 聊天"
+        case .social: return "闲聊"
         case .technical: return "教程 / 设置"
         case .documentation: return "凭证 / 记录"
         case .inspiration: return "灵感 / 记忆"
-        case .other: return "其他 / 待确认"
+        case .other: return "其他"
         }
     }
 
@@ -71,7 +71,7 @@ enum Category: String, Codable, CaseIterable, Hashable {
         case .health:
             return [Self.field("检查 / 药品项目", .healthItem), Self.field("就诊 / 检查日期", .date)]
         case .social:
-            return [Self.field("联系人 / 群聊", .conversationPartner, fallbacks: [.contact]), Self.field("消息摘录", .excerpt)]
+            return [Self.title("聊天内容"), Self.field("消息摘录", .excerpt)]
         case .technical:
             return [Self.field("操作对象", .operationTarget), Self.field("问题 / 操作步骤", .issueSteps, fallbacks: [.excerpt])]
         case .documentation:
@@ -106,7 +106,7 @@ enum Category: String, Codable, CaseIterable, Hashable {
         case "place", "地点 / 旅行": self = .place
         case "learning", "学习 / 资料": self = .learning
         case "health", "健康": self = .health
-        case "social", "社交 / 聊天": self = .social
+        case "social", "闲聊", "社交 / 聊天": self = .social
         case "technical", "教程 / 设置": self = .technical
         case "documentation", "凭证 / 记录": self = .documentation
         case "inspiration", "灵感 / 记忆": self = .inspiration
@@ -120,6 +120,7 @@ enum CategoryGroup: String, CaseIterable, Identifiable, Hashable {
     case schedules
     case purchases
     case collections
+    case conversations
 
     var id: Self { self }
 
@@ -129,6 +130,7 @@ enum CategoryGroup: String, CaseIterable, Identifiable, Hashable {
         case .schedules: return "日程 / 预约 / 出行"
         case .purchases: return "消费 / 订单 / 凭证"
         case .collections: return "资料 / 地点 / 灵感收藏"
+        case .conversations: return "闲聊"
         }
     }
 
@@ -138,6 +140,7 @@ enum CategoryGroup: String, CaseIterable, Identifiable, Hashable {
         case .schedules: return "calendar"
         case .purchases: return "creditcard"
         case .collections: return "bookmark"
+        case .conversations: return "bubble.left.and.bubble.right"
         }
     }
 }
@@ -148,7 +151,8 @@ extension Category {
         case .delivery, .pickup: return .collectionCodes
         case .event, .health: return .schedules
         case .payment, .shopping, .documentation: return .purchases
-        case .place, .learning, .technical, .social, .inspiration, .other: return .collections
+        case .place, .learning, .technical, .inspiration, .other: return .collections
+        case .social: return .conversations
         }
     }
 }
@@ -223,7 +227,7 @@ enum ItemState: String, Codable, CaseIterable, Hashable {
 
     var displayName: String {
         switch self {
-        case .needsReview: return "待确认"
+        case .needsReview: return "需重新处理"
         case .pending: return "待处理"
         case .completed: return "已完成"
         case .archived: return "已归档"
@@ -247,6 +251,12 @@ enum FieldKind: String, Codable, CaseIterable, Hashable {
     case deadline, orderStatus
     case parcelStation, venue, eventName, eventTime, price, route, topic, healthItem
     case conversationPartner, excerpt, operationTarget, issueSteps, documentType, documentReference
+
+    /// These fields contain complementary source fragments or reference resources,
+    /// rather than competing answers to one question (such as the paid amount).
+    var isRepeatableContent: Bool {
+        [.excerpt, .issueSteps, .url, .route].contains(self)
+    }
 
     var displayName: String {
         switch self {
@@ -330,9 +340,10 @@ struct RecognizedScene: Codable, Identifiable {
     var fields: [ExtractedField]
     var contentNature: String
     var reviewReasons: [String]
+    var reprocessingReasons: [ReprocessingReason]? = nil
 }
 
-/// Evidence-based admission is separate from an OCR score or model self-rating.
+/// Retained for compatibility with cards saved by the confirmation workflow.
 enum DisplayApproval: String, Codable {
     case automatic
     case userConfirmed
@@ -352,6 +363,7 @@ struct InformationItem: Identifiable, Codable {
     var imageName: String = ""
     var fingerprint: String = ""
     var photoAssetIdentifier: String? = nil
+    var photoAssetCreatedAt: Date? = nil
     var titleWasUserEdited: Bool = false
     var categoryWasUserEdited: Bool = false
     var intents: [IntentTag] = []
@@ -364,30 +376,25 @@ struct InformationItem: Identifiable, Codable {
     var reviewReasons: [String]? = nil
     var recognizedScenes: [RecognizedScene]? = nil
     var displayApproval: DisplayApproval? = nil
+    var reprocessingReasons: [ReprocessingReason]? = nil
 
-    var requiresHumanReview: Bool {
-        state == .needsReview || (state == .pending && displayApproval == nil)
-    }
+    var displayState: ItemState { state }
+    var needsReprocessing: Bool { state == .needsReview }
 
-    var displayState: ItemState { requiresHumanReview ? .needsReview : state }
-
-    mutating func requireReviewBeforeDisplay() {
-        guard state == .pending, displayApproval == nil else { return }
-        state = .needsReview
-        var reasons = reviewReasons ?? []
-        if reasons.isEmpty { reasons.append("尚未完成展示前核对，请确认分类和关键信息") }
-        reviewReasons = reasons
-    }
-
-    mutating func confirmForDisplay() {
-        displayApproval = .userConfirmed
-        state = .pending
+    /// Complete cards appear immediately, without a manual approval step.
+    mutating func prepareForDisplay(preserveFinalState: Bool = true) {
+        let requestedState = state
+        let finalState = state == .completed || state == .archived
+        guard !preserveFinalState || !finalState else { return }
+        reprocessingReasons = CardCompleteness.evaluate(self)
+        state = reprocessingReasons?.isEmpty == false ? .needsReview : finalState ? requestedState : .pending
+        displayApproval = state == .pending ? .automatic : nil
     }
 
     private enum CodingKeys: String, CodingKey {
         case id, createdAt, category, title, rawText, code, amount, note, state, reminderAt, imageName, fingerprint
-        case contentNature, reviewReasons, recognizedScenes, displayApproval
-        case photoAssetIdentifier, titleWasUserEdited, categoryWasUserEdited, intents, fields, ocrDocument, classificationConfidence, matchedKeywords, classificationVersion
+        case contentNature, reviewReasons, recognizedScenes, displayApproval, reprocessingReasons
+        case photoAssetIdentifier, photoAssetCreatedAt, titleWasUserEdited, categoryWasUserEdited, intents, fields, ocrDocument, classificationConfidence, matchedKeywords, classificationVersion
     }
 
     init(category: Category, title: String, rawText: String) {
@@ -411,6 +418,7 @@ struct InformationItem: Identifiable, Codable {
         imageName = try container.decodeIfPresent(String.self, forKey: .imageName) ?? ""
         fingerprint = try container.decodeIfPresent(String.self, forKey: .fingerprint) ?? ""
         photoAssetIdentifier = try container.decodeIfPresent(String.self, forKey: .photoAssetIdentifier)
+        photoAssetCreatedAt = try container.decodeIfPresent(Date.self, forKey: .photoAssetCreatedAt)
         titleWasUserEdited = try container.decodeIfPresent(Bool.self, forKey: .titleWasUserEdited) ?? false
         categoryWasUserEdited = try container.decodeIfPresent(Bool.self, forKey: .categoryWasUserEdited) ?? false
         intents = try container.decodeIfPresent([IntentTag].self, forKey: .intents) ?? []
@@ -423,6 +431,7 @@ struct InformationItem: Identifiable, Codable {
         reviewReasons = try container.decodeIfPresent([String].self, forKey: .reviewReasons)
         recognizedScenes = try container.decodeIfPresent([RecognizedScene].self, forKey: .recognizedScenes)
         displayApproval = try container.decodeIfPresent(DisplayApproval.self, forKey: .displayApproval)
+        reprocessingReasons = try container.decodeIfPresent([ReprocessingReason].self, forKey: .reprocessingReasons)
         if fields.isEmpty {
             if !code.isEmpty { fields.append(ExtractedField(kind: .code, value: code, confidence: 1, sourceBlockIDs: [])) }
             if !amount.isEmpty { fields.append(ExtractedField(kind: .amount, value: amount, confidence: 1, sourceBlockIDs: [])) }

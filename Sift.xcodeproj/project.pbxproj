@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		21D012DB599B877A343D071D /* RecognitionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3028EC3D6ED712B0258FCB7 /* RecognitionPolicy.swift */; };
+		2C343F5A6DFAB2C53E52AC71 /* ReprocessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDE631A9188B12ECA78CFEF /* ReprocessingView.swift */; };
 		4559BA34F688288543DA22AF /* MLXLLM in Frameworks */ = {isa = PBXBuildFile; productRef = 3397F4CF4B7BE11A712E4AF1 /* MLXLLM */; };
 		496C9EB10D08181D32F556FD /* SemanticDeviceSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E13FA26288533605E5A15E5 /* SemanticDeviceSmokeTests.swift */; };
 		5BCA0A5911E2DDF460386148 /* ScreenshotViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C511DECE8918627BBB82395C /* ScreenshotViewer.swift */; };
 		626D9FF86D2A08D9EFA3058C /* GroundedExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5115045E9D6EE71692406259 /* GroundedExtractionTests.swift */; };
 		630D6232F858E2E755F3CE62 /* SiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C500888A6085BCD2AF0E9972 /* SiftApp.swift */; };
+		7BEF085720677826F8436A27 /* ReprocessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53956493F18E9408524BCC /* ReprocessingTests.swift */; };
 		8A7CD4C08B0667C1AAD561C0 /* SemanticExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2A41CBACFEABD45B0FA358 /* SemanticExtractionTests.swift */; };
 		8B0FD822EE23EB88EE8EC08A /* LocalModelBundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACEA4DCCDF34697011660CE /* LocalModelBundleTests.swift */; };
 		8E3270A20EAF510CF48B339E /* PreviewLaunchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B329041111F611FE5FBC6EF /* PreviewLaunchOptions.swift */; };
@@ -39,6 +41,8 @@
 		DFFF698A2DF4EEFD437036D8 /* ScheduleAdmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9671CEC4CD79CF2C1EBA18CA /* ScheduleAdmission.swift */; };
 		E28E5E15EA77284F34B747EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08B127D3491D0E77696F1D55 /* Assets.xcassets */; };
 		E2A50EF7A763338470C82AF6 /* CardStacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99B0AC86E5EDBFDA7B44B48 /* CardStacks.swift */; };
+		E2D1A8C8C0E641290AC82EA0 /* Reprocessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D34D96AA4BD6DAE502BFCF /* Reprocessing.swift */; };
+		E9B740D0A5CC2660D133EC53 /* PickupStoreResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D8CA66A26F1C027A58F07D /* PickupStoreResolver.swift */; };
 		F2A86895DB3EFAB6D0958708 /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = FFEFC2763460564A717636B7 /* Tokenizers */; };
 /* End PBXBuildFile section */
 
@@ -73,8 +77,10 @@
 		74A40F319BE90CB406938E6A /* LocalModelEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalModelEngine.swift; sourceTree = "<group>"; };
 		8124A6F6D41BCDFF28BAC5BA /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		8742367C8DB3F360837578A2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8B53956493F18E9408524BCC /* ReprocessingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReprocessingTests.swift; sourceTree = "<group>"; };
 		8CEFE07E40B5883E33B09911 /* SiftTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9671CEC4CD79CF2C1EBA18CA /* ScheduleAdmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAdmission.swift; sourceTree = "<group>"; };
+		99D8CA66A26F1C027A58F07D /* PickupStoreResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupStoreResolver.swift; sourceTree = "<group>"; };
 		9AC80E3BF15B738608510D5C /* FocusedScanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedScanTests.swift; sourceTree = "<group>"; };
 		9B329041111F611FE5FBC6EF /* PreviewLaunchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLaunchOptions.swift; sourceTree = "<group>"; };
 		9E82139990C66288B387F93D /* LocalServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalServices.swift; sourceTree = "<group>"; };
@@ -89,8 +95,10 @@
 		D3028EC3D6ED712B0258FCB7 /* RecognitionPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionPolicy.swift; sourceTree = "<group>"; };
 		D3C66D25DBD8F79CFE0F401B /* ScreenshotScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotScan.swift; sourceTree = "<group>"; };
 		E14893D10273A533508DA451 /* ScanRangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanRangeUITests.swift; sourceTree = "<group>"; };
+		E9D34D96AA4BD6DAE502BFCF /* Reprocessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reprocessing.swift; sourceTree = "<group>"; };
 		ECF79F41F71AEC33503929A7 /* GroundedExtraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundedExtraction.swift; sourceTree = "<group>"; };
 		ED24EFB928BF45668344C88D /* ScheduleAdmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAdmissionTests.swift; sourceTree = "<group>"; };
+		EEDE631A9188B12ECA78CFEF /* ReprocessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReprocessingView.swift; sourceTree = "<group>"; };
 		FA62C418F2C2051DABD787E8 /* BackgroundScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundScan.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +133,7 @@
 				9AC80E3BF15B738608510D5C /* FocusedScanTests.swift */,
 				5115045E9D6EE71692406259 /* GroundedExtractionTests.swift */,
 				6ACEA4DCCDF34697011660CE /* LocalModelBundleTests.swift */,
+				8B53956493F18E9408524BCC /* ReprocessingTests.swift */,
 				ED24EFB928BF45668344C88D /* ScheduleAdmissionTests.swift */,
 				3E13FA26288533605E5A15E5 /* SemanticDeviceSmokeTests.swift */,
 				BB2A41CBACFEABD45B0FA358 /* SemanticExtractionTests.swift */,
@@ -165,8 +174,11 @@
 				ECF79F41F71AEC33503929A7 /* GroundedExtraction.swift */,
 				74A40F319BE90CB406938E6A /* LocalModelEngine.swift */,
 				9E82139990C66288B387F93D /* LocalServices.swift */,
+				99D8CA66A26F1C027A58F07D /* PickupStoreResolver.swift */,
 				9B329041111F611FE5FBC6EF /* PreviewLaunchOptions.swift */,
 				D3028EC3D6ED712B0258FCB7 /* RecognitionPolicy.swift */,
+				E9D34D96AA4BD6DAE502BFCF /* Reprocessing.swift */,
+				EEDE631A9188B12ECA78CFEF /* ReprocessingView.swift */,
 				9671CEC4CD79CF2C1EBA18CA /* ScheduleAdmission.swift */,
 				D3C66D25DBD8F79CFE0F401B /* ScreenshotScan.swift */,
 				73A4AFC754325F159E0E42B2 /* ScreenshotScanSheet.swift */,
@@ -331,8 +343,11 @@
 				BC8E9297D39429AD398BE399 /* GroundedExtraction.swift in Sources */,
 				DEBD443B52F95F9842A7F523 /* LocalModelEngine.swift in Sources */,
 				CA3DD94DF4C34461CD5D8C52 /* LocalServices.swift in Sources */,
+				E9B740D0A5CC2660D133EC53 /* PickupStoreResolver.swift in Sources */,
 				8E3270A20EAF510CF48B339E /* PreviewLaunchOptions.swift in Sources */,
 				21D012DB599B877A343D071D /* RecognitionPolicy.swift in Sources */,
+				E2D1A8C8C0E641290AC82EA0 /* Reprocessing.swift in Sources */,
+				2C343F5A6DFAB2C53E52AC71 /* ReprocessingView.swift in Sources */,
 				DFFF698A2DF4EEFD437036D8 /* ScheduleAdmission.swift in Sources */,
 				B5B63281F4582D531D11AA03 /* ScreenshotScan.swift in Sources */,
 				AEEB7D53D8B575F97EAE7192 /* ScreenshotScanSheet.swift in Sources */,
@@ -360,6 +375,7 @@
 				BE22273E58F341AD877BABBD /* FocusedScanTests.swift in Sources */,
 				626D9FF86D2A08D9EFA3058C /* GroundedExtractionTests.swift in Sources */,
 				8B0FD822EE23EB88EE8EC08A /* LocalModelBundleTests.swift in Sources */,
+				7BEF085720677826F8436A27 /* ReprocessingTests.swift in Sources */,
 				9457AE07AA431A548D8D6EB6 /* ScheduleAdmissionTests.swift in Sources */,
 				496C9EB10D08181D32F556FD /* SemanticDeviceSmokeTests.swift in Sources */,
 				8A7CD4C08B0667C1AAD561C0 /* SemanticExtractionTests.swift in Sources */,

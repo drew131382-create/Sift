@@ -4,14 +4,20 @@ struct CardStackSection: View {
     let group: CategoryGroup
     let items: [InformationItem]
     let expanded: Bool
+    var automaticExpansion: Bool = false
     var toggle: () -> Void
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    private var reduceMotion: Bool { systemReduceMotion || PreviewLaunchOptions.reduceMotion }
     @Environment(\.dynamicTypeSize) private var typeSize
+    @Namespace private var stackSpace
+    @State private var visualExpanded = false
+    @State private var moving = false
+    @State private var motionTask: Task<Void, Never>?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Button {
-                withAnimation(reduceMotion ? nil : .spring(response: 0.32, dampingFraction: 0.9)) { toggle() }
+                toggle()
             } label: {
                 Group {
                     if typeSize.isAccessibilitySize {
@@ -31,31 +37,72 @@ struct CardStackSection: View {
             if items.isEmpty {
                 Text("暂无\(group.shortTitle)信息").font(.subheadline).foregroundStyle(SiftStyle.secondaryInk)
                     .frame(maxWidth: .infinity, alignment: .leading).padding(.bottom, 4)
-            } else if expanded {
-                LazyVStack(spacing: -8) {
-                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                        SiftItemCard(item: item).zIndex(Double(items.count - index))
-                    }
-                }
             } else if let first = items.first {
-                SiftItemCard(item: first)
-                    .background(alignment: .bottom) {
-                        if items.count > 2 {
-                            RoundedRectangle(cornerRadius: SiftStyle.radius).fill(SiftStyle.surface)
-                                .overlay(RoundedRectangle(cornerRadius: SiftStyle.radius).strokeBorder(SiftStyle.border, lineWidth: 1))
-                                .padding(.horizontal, 12).rotationEffect(.degrees(-2), anchor: .bottom)
-                                .offset(y: 30).shadow(color: .black.opacity(0.04), radius: 5, y: 3)
-                                .allowsHitTesting(false).accessibilityHidden(true)
+                VStack(spacing: 14) {
+                    SiftItemCard(item: first)
+                        .matchedGeometryEffect(id: first.id, in: stackSpace)
+                        .zIndex(3)
+                        .background(alignment: .bottom) {
+                            if !visualExpanded {
+                                ForEach(Array(items.prefix(3).dropFirst().enumerated()), id: \.element.id) { offset, item in
+                                    let layer = offset + 1
+                                    RoundedRectangle(cornerRadius: SiftStyle.radius)
+                                        .fill(layer == 1 ? SiftStyle.accent : SiftStyle.surface)
+                                        .overlay(RoundedRectangle(cornerRadius: SiftStyle.radius).strokeBorder(SiftStyle.border, lineWidth: 1))
+                                        .padding(.horizontal, CGFloat(layer * 6))
+                                        .rotationEffect(.degrees(reduceMotion ? 0 : layer == 1 ? 1.5 : -2), anchor: .bottom)
+                                        .offset(y: CGFloat(layer * 16))
+                                        .shadow(color: .black.opacity(0.05), radius: 5, y: 3)
+                                        .matchedGeometryEffect(id: item.id, in: stackSpace)
+                                        .zIndex(Double(-layer))
+                                        .allowsHitTesting(false).accessibilityHidden(true)
+                                }
+                            }
                         }
-                        if items.count > 1 {
-                            RoundedRectangle(cornerRadius: SiftStyle.radius).fill(SiftStyle.accent)
-                                .padding(.horizontal, 6).rotationEffect(.degrees(1.5), anchor: .bottom)
-                                .offset(y: 16).shadow(color: .black.opacity(0.045), radius: 5, y: 3)
-                                .allowsHitTesting(false).accessibilityHidden(true)
+                        .padding(.bottom, visualExpanded ? 0 : CGFloat(min(items.count - 1, 2) * 16 + (items.count > 1 ? 4 : 0)))
+                    if visualExpanded {
+                        LazyVStack(spacing: 14) {
+                            ForEach(Array(items.dropFirst().enumerated()), id: \.element.id) { index, item in
+                                if index < 2 {
+                                    SiftItemCard(item: item)
+                                        .matchedGeometryEffect(id: item.id, in: stackSpace)
+                                        .transition(cardTransition(index: index))
+                                        .animation(stackAnimation(delay: Double(index + 1) * 0.05), value: visualExpanded)
+                                } else {
+                                    SiftItemCard(item: item)
+                                        .transition(reduceMotion || automaticExpansion ? .opacity : .opacity.combined(with: .offset(y: -12)))
+                                }
+                            }
                         }
-                    }.padding(.bottom, items.count > 2 ? 34 : items.count > 1 ? 20 : 0)
+                    }
+                }.allowsHitTesting(!moving).disabled(moving)
             }
         }.accessibilityElement(children: .contain)
+            .onAppear { visualExpanded = expanded }
+            .onChange(of: expanded) { _, value in setExpansion(value) }
+            .onChange(of: automaticExpansion) { _, _ in setExpansion(expanded) }
+            .onDisappear { motionTask?.cancel(); moving = false }
+    }
+
+    private func stackAnimation(delay: Double = 0) -> Animation? {
+        if automaticExpansion { return nil }
+        return reduceMotion ? .easeInOut(duration: 0.15) : .spring(response: 0.42, dampingFraction: 0.84).delay(delay)
+    }
+    private func cardTransition(index: Int) -> AnyTransition {
+        if reduceMotion || automaticExpansion { return .opacity }
+        return .modifier(active: StackCardPose(rotation: index == 0 ? 1.5 : -2, scale: 0.97, lift: -16),
+                         identity: StackCardPose(rotation: 0, scale: 1, lift: 0)).combined(with: .opacity)
+    }
+    private func setExpansion(_ value: Bool) {
+        motionTask?.cancel()
+        moving = !automaticExpansion
+        withAnimation(stackAnimation()) { visualExpanded = value }
+        guard !automaticExpansion else { moving = false; return }
+        motionTask = Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(reduceMotion ? 160 : 650))
+            guard !Task.isCancelled else { return }
+            moving = false
+        }
     }
     private var groupLabel: some View {
         Label(group.shortTitle,systemImage:group.symbol)
@@ -75,6 +122,17 @@ struct CardStackSection: View {
         }
     }
 
+}
+
+private struct StackCardPose: ViewModifier {
+    var rotation: Double
+    var scale: CGFloat
+    var lift: CGFloat
+    func body(content: Content) -> some View {
+        content.rotationEffect(.degrees(rotation), anchor: .top)
+            .scaleEffect(scale, anchor: .top).offset(y: lift)
+            .shadow(color: .black.opacity(lift == 0 ? 0 : 0.06), radius: lift == 0 ? 0 : 8, y: 3)
+    }
 }
 
 struct SiftItemCard: View {
@@ -100,6 +158,7 @@ struct SiftItemCard: View {
             return fields + [CategoryCardField(label: "订单状态", source: .fields(primary: .orderStatus, fallbacks: []))]
         case .collections:
             return item.category.cardFields + [CategoryCardField(label: "参考价", source: .fields(primary: .price, fallbacks: []))]
+        case .conversations: return item.category.cardFields
         }
     }
 
@@ -108,7 +167,7 @@ struct SiftItemCard: View {
         case .collectionCodes: return slots.first { $0.editableKind == .code }
         case .schedules: return slots.first { $0.source == .eventDateTime || $0.editableKind == .date || $0.editableKind == .eventTime }
         case .purchases: return slots.first { $0.editableKind == .amount } ?? slots.first { $0.editableKind == .price }
-        case .collections: return nil
+        case .collections, .conversations: return nil
         }
     }
 
@@ -180,7 +239,7 @@ struct SiftItemCard: View {
                                 .background(emphasis.editableKind == .code ? SiftStyle.accent : .clear, in: RoundedRectangle(cornerRadius: 8))
                         }
                     } else if emphasis.editableKind == .code {
-                        Label("号码待确认", systemImage: "exclamationmark.circle").font(.subheadline).foregroundStyle(SiftStyle.warning)
+                        Label("未识别到号码", systemImage: "exclamationmark.circle").font(.subheadline).foregroundStyle(SiftStyle.warning)
                     }
                 }
                 VStack(alignment: .leading, spacing: 4) {

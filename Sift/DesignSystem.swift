@@ -36,6 +36,7 @@ extension CategoryGroup {
         case .schedules: return "日程"
         case .purchases: return "消费"
         case .collections: return "收藏"
+        case .conversations: return "闲聊"
         }
     }
     var index: String {
@@ -44,6 +45,7 @@ extension CategoryGroup {
         case .schedules: return "02"
         case .purchases: return "03"
         case .collections: return "04"
+        case .conversations: return "05"
         }
     }
     var emptyMessage: String {
@@ -52,6 +54,7 @@ extension CategoryGroup {
         case .schedules: return "下一次约定，留在这里。"
         case .purchases: return "订单与凭证，有处可寻。"
         case .collections: return "留住一个值得回看的发现。"
+        case .conversations: return "把值得回看的对话收在这里。"
         }
     }
 }

@@ -14,50 +14,60 @@ final class SiftStore: ObservableObject {
     @Published var stopRequested = false
     @Published var scanSuspended = false
     @Published var backgroundScanStatus: String?
+    @Published var automaticRecognitionStatus: String?
     @Published var message: String?
     private var repository: LocalRepository?
     private var records: [String: ScanRecord] = [:]
     private var operationRunning = false
     private let fetchAssets: @MainActor (ScreenshotDateRange) async throws -> [LocalPhotoAsset]
+    private let creationDates: @MainActor ([String]) async -> [String: Date]
     private let loadImage: @MainActor (LocalPhotoAsset) async throws -> Data
     private let recognize: @MainActor (Data) async throws -> OCRDocument
     private let limitedAccess: @MainActor () -> Bool
     private let extract: @MainActor (OCRDocument) async throws -> ExtractionDecision
     private let extractionVersion: String
+    private let preferences: UserDefaults
     private var paused = false
     private var foreground = true
     private var scanSession: ScanSession?
+    private var automaticUpdateRequested = false
+    private var automaticSyncPreparing = false
     private let backgroundScan = BackgroundScan()
     private let thumbnails = NSCache<NSString, UIImage>()
 
     init(repository: LocalRepository? = nil,
          fetchAssets: @escaping @MainActor (ScreenshotDateRange) async throws -> [LocalPhotoAsset] = { try await LocalPhotoLibrary.screenshotAssets(in: $0) },
+         creationDates: @escaping @MainActor ([String]) async -> [String: Date] = { await LocalPhotoLibrary.creationDates(for: $0) },
          loadImage: @escaping @MainActor (LocalPhotoAsset) async throws -> Data = { try await LocalPhotoLibrary.imageData(for: $0) },
          recognize: @escaping @MainActor (Data) async throws -> OCRDocument = { try await LocalOCR.recognize($0) },
          limitedAccess: @escaping @MainActor () -> Bool = { LocalPhotoLibrary.hasLimitedAccess },
          extractionVersion: String = SemanticPolicy.version,
          extract: @escaping @MainActor (OCRDocument) async throws -> ExtractionDecision = { try await LocalModelEngine.shared.evaluate(document: $0) },
-         resumePendingJobs: Bool = true) {
+         resumePendingJobs: Bool = true,
+         preferences: UserDefaults = .standard) {
         self.fetchAssets = fetchAssets
+        self.creationDates = creationDates
         self.loadImage = loadImage
         self.recognize = recognize
         self.limitedAccess = limitedAccess
         self.extract = extract
         self.extractionVersion = extractionVersion
+        self.preferences = preferences
         thumbnails.totalCostLimit = 24 * 1024 * 1024
         do {
             self.repository = try repository ?? LocalRepository()
-            items = try self.repository!.load().map { var item = $0; item.requireReviewBeforeDisplay(); return item }
+            items = try self.repository!.load().map { var item = $0; item.prepareForDisplay(); return item }
             jobs = try self.repository!.loadJobs()
             scanSession = try self.repository!.loadScanSession()
             if var session = scanSession {
-                // A terminated app must not silently acquire a new system grant.
-                session.requiresResume = true
+                // Automatic sessions resume on launch; manually started scans still
+                // require the user's explicit Continue action after termination.
+                session.requiresResume = !(session.automatic == true && preferences.bool(forKey: AutomaticRecognitionSettings.enabledKey))
                 scanSession = session
                 try self.repository!.save(session: session)
                 scanReport = session.report
                 scanTotal = session.total
-                scanSuspended = true
+                scanSuspended = session.requiresResume
             }
             records = Dictionary(uniqueKeysWithValues: try self.repository!.loadScanRecords().map { ($0.key, $0) })
             try? self.repository!.cleanUnreferencedImages()
@@ -71,13 +81,92 @@ final class SiftStore: ObservableObject {
     func save(_ item: InformationItem) throws {
         guard let repository else { throw LocalError.storage("数据库不可用") }
         var stored = item
-        stored.requireReviewBeforeDisplay()
+        let preserveFinalState = items.contains { $0.id == item.id && $0.state == item.state && ($0.state == .completed || $0.state == .archived) }
+        stored.prepareForDisplay(preserveFinalState: preserveFinalState)
         try repository.save(stored)
-        items = try repository.load().map { var item = $0; item.requireReviewBeforeDisplay(); return item }
+        if !stored.needsReprocessing {
+            for job in associatedJobs(for: stored) where job.state == .failed {
+                try repository.delete(jobID: job.id)
+                jobs.removeAll { $0.id == job.id }
+            }
+        }
+        items = try repository.load().map { var item = $0; item.prepareForDisplay(); return item }
     }
 
     var dataDirectory: URL? { repository?.directory }
     var canScanInBackground: Bool { backgroundScan.isGranted }
+
+    func associatedJobs(for item: InformationItem) -> [ProcessingJob] {
+        jobs.filter { job in
+            job.replacementItemID == item.id ||
+            (item.photoAssetIdentifier != nil && item.photoAssetIdentifier == job.photoAssetIdentifier) ||
+            (!item.fingerprint.isEmpty && item.fingerprint == job.fingerprint)
+        }
+    }
+
+    var displayableItems: [InformationItem] {
+        items.filter { !$0.needsReprocessing && associatedJobs(for: $0).isEmpty }
+    }
+
+    var reprocessingEntries: [ReprocessingEntry] {
+        var entries: [ReprocessingEntry] = []
+        var used = Set<UUID>()
+        for item in items {
+            let related = associatedJobs(for: item)
+            guard item.needsReprocessing || !related.isEmpty else { continue }
+            used.formUnion(related.map(\.id))
+            if entries.contains(where: { entry in
+                guard let old = entry.item else { return false }
+                return (item.photoAssetIdentifier != nil && item.photoAssetIdentifier == old.photoAssetIdentifier) ||
+                    (!item.fingerprint.isEmpty && item.fingerprint == old.fingerprint)
+            }) { continue }
+            entries.append(ReprocessingEntry(item: item, job: related.sorted { $0.updatedAt > $1.updatedAt }.first))
+        }
+        for job in jobs where !used.contains(job.id) {
+            if let index = entries.firstIndex(where: { entry in
+                guard let old = entry.job else { return false }
+                return (job.photoAssetIdentifier != nil && job.photoAssetIdentifier == old.photoAssetIdentifier) ||
+                    (!job.fingerprint.isEmpty && job.fingerprint == old.fingerprint)
+            }) {
+                if let old = entries[index].job, job.updatedAt > old.updatedAt { entries[index].job = job }
+            } else { entries.append(ReprocessingEntry(item: nil, job: job)) }
+        }
+        return entries.sorted { $0.createdAt > $1.createdAt }
+    }
+
+    func imageURL(_ job: ProcessingJob) -> URL? {
+        guard !job.imageName.isEmpty else { return nil }
+        return repository?.directory.appendingPathComponent(job.imageName)
+    }
+
+    func thumbnail(_ job: ProcessingJob) -> UIImage? {
+        var reference = InformationItem(category: .other, title: "", rawText: "")
+        reference.imageName = job.imageName
+        return thumbnail(reference)
+    }
+
+    func editableItem(for job: ProcessingJob) -> InformationItem {
+        var item = InformationItem(category: .other, title: "", rawText: "")
+        item.id = job.replacementItemID ?? job.id
+        item.imageName = job.imageName
+        item.fingerprint = job.fingerprint
+        item.photoAssetIdentifier = job.photoAssetIdentifier
+        item.createdAt = job.createdAt
+        return item
+    }
+
+    func retry(_ item: InformationItem) async {
+        guard let repository, !operationRunning else { return }
+        if let job = associatedJobs(for: item).first { await retry(job); return }
+        guard scanSession == nil else { message = "请先继续或停止当前扫描，再重新识别。"; return }
+        var job = ProcessingJob(imageName: item.imageName, fingerprint: item.fingerprint, replacementItemID: item.id, photoAssetIdentifier: item.photoAssetIdentifier)
+        job.photoAssetCreatedAt = item.photoAssetCreatedAt ?? item.createdAt
+        do {
+            try repository.save(job: job)
+            jobs.append(job)
+            await retry(job)
+        } catch { message = error.localizedDescription }
+    }
 
     func clearUnusedFiles() async throws {
         guard let repository else { throw LocalError.storage("数据库不可用") }
@@ -120,6 +209,10 @@ final class SiftStore: ObservableObject {
 
     func setForeground(_ foreground: Bool) {
         self.foreground = foreground
+        if foreground, scanSession?.automatic == true, preferences.bool(forKey: AutomaticRecognitionSettings.enabledKey), scanSession?.requiresResume == true {
+            Task { await continueScan() }
+            return
+        }
         paused = scanSession?.requiresResume == true || (!foreground && !backgroundScan.isGranted)
         if paused {
             if !foreground && scanSession != nil { suspendScan(reason: "扫描已暂停，进度已保存；返回后可继续。") }
@@ -128,6 +221,100 @@ final class SiftStore: ObservableObject {
         } else if foreground && !operationRunning && scanSession?.requiresResume != true && jobs.contains(where: { $0.state != .failed }) {
             Task { await resumeJobs() }
         }
+    }
+
+    func updateAutomaticRecognition(enabled: Bool, retentionDays: Int) async {
+        preferences.set(enabled, forKey: AutomaticRecognitionSettings.enabledKey)
+        let days = AutomaticRecognitionSettings.availableRetentionDays.contains(retentionDays)
+            ? retentionDays : AutomaticRecognitionSettings.defaultRetentionDays
+        preferences.set(days, forKey: AutomaticRecognitionSettings.retentionDaysKey)
+        guard enabled else {
+            automaticUpdateRequested = false
+            if scanSession?.automatic == true { stopScanning() }
+            automaticRecognitionStatus = "自动识别已关闭。"
+            return
+        }
+        await automaticScreenshotUpdateIfEnabled(forceUpdate: true)
+    }
+
+    func automaticScreenshotUpdateIfEnabled(forceUpdate: Bool = false) async {
+        guard preferences.bool(forKey: AutomaticRecognitionSettings.enabledKey) else { return }
+        guard foreground else { return }
+        if let session = scanSession, session.automatic == true {
+            if forceUpdate { automaticUpdateRequested = true }
+            return
+        }
+        guard !operationRunning, scanSession == nil, !automaticSyncPreparing else {
+            automaticUpdateRequested = true
+            return
+        }
+        automaticSyncPreparing = true
+        defer {
+            automaticSyncPreparing = false
+            if automaticUpdateRequested, !operationRunning, scanSession == nil,
+               foreground, preferences.bool(forKey: AutomaticRecognitionSettings.enabledKey) {
+                automaticUpdateRequested = false
+                Task { await automaticScreenshotUpdateIfEnabled() }
+            }
+        }
+        automaticUpdateRequested = false
+        automaticRecognitionStatus = "正在检查自动识别范围…"
+        do {
+            let identifiers = Set(items.compactMap(\.photoAssetIdentifier) + jobs.compactMap(\.photoAssetIdentifier) + records.values.compactMap(\.assetIdentifier))
+            let dates = await creationDates(Array(identifiers))
+            guard preferences.bool(forKey: AutomaticRecognitionSettings.enabledKey), foreground else { return }
+            guard !operationRunning, scanSession == nil else { automaticUpdateRequested = true; return }
+            let days = AutomaticRecognitionSettings.retentionDays(from: preferences)
+            let range = ScreenshotDateRange.recent(days: days)
+            automaticUpdateRequested = false
+            let removed = try removeExpiredScreenshotData(olderThan: range.start, creationDates: dates)
+            automaticRecognitionStatus = "正在更新最近 \(days) 天的截图…"
+            await scanScreenshotAlbum(in: range, automatic: true)
+            if preferences.bool(forKey: AutomaticRecognitionSettings.enabledKey) {
+                if automaticRecognitionStatus?.hasPrefix("自动更新失败：") == true { return }
+                if scanSession?.automatic == true {
+                    automaticRecognitionStatus = "后台处理已暂停；打开 Sift 后会继续。"
+                    return
+                }
+                let removedText = removed > 0 ? " · 已从 Sift 清理过期内容 \(removed) 张" : ""
+                let failedText = scanReport.failed > 0 ? " · \(scanReport.failed) 张失败，可在信息库中重试" : ""
+                automaticRecognitionStatus = "最近 \(days) 天已更新\(removedText)\(failedText)；照片原图保留。"
+            }
+        } catch {
+            automaticRecognitionStatus = "自动更新失败：\(error.localizedDescription)"
+        }
+    }
+
+    @discardableResult
+    private func removeExpiredScreenshotData(olderThan cutoff: Date, creationDates: [String: Date]) throws -> Int {
+        guard let repository else { throw LocalError.storage("数据库不可用") }
+        let expiredItems = items.filter { item in
+            guard let identifier = item.photoAssetIdentifier else { return false }
+            return (item.photoAssetCreatedAt ?? creationDates[identifier] ?? item.createdAt) < cutoff
+        }
+        let expiredJobs = jobs.filter { job in
+            guard let identifier = job.photoAssetIdentifier else { return false }
+            return (job.photoAssetCreatedAt ?? creationDates[identifier] ?? job.createdAt) < cutoff
+        }
+        let expiredRecords = records.values.filter { record in
+            guard let identifier = record.assetIdentifier, let date = record.assetCreatedAt ?? creationDates[identifier] else { return false }
+            return date < cutoff
+        }
+        guard !expiredItems.isEmpty || !expiredJobs.isEmpty || !expiredRecords.isEmpty else { return 0 }
+        try repository.transaction {
+            for item in expiredItems { try repository.delete(itemID: item.id) }
+            for job in expiredJobs { try repository.delete(jobID: job.id) }
+            for record in expiredRecords { try repository.deleteScanRecord(key: record.key) }
+        }
+        let itemIDs = Set(expiredItems.map(\.id))
+        let jobIDs = Set(expiredJobs.map(\.id))
+        let recordKeys = Set(expiredRecords.map(\.key))
+        items.removeAll { itemIDs.contains($0.id) }
+        jobs.removeAll { jobIDs.contains($0.id) }
+        for key in recordKeys { records.removeValue(forKey: key) }
+        try repository.cleanUnreferencedImages()
+        thumbnails.removeAllObjects()
+        return Set(expiredItems.compactMap(\.photoAssetIdentifier) + expiredJobs.compactMap(\.photoAssetIdentifier)).count
     }
 
     func handleMemoryWarning() {
@@ -177,7 +364,7 @@ final class SiftStore: ObservableObject {
         message = report.summary()
     }
 
-    func scanScreenshotAlbum(in range: ScreenshotDateRange) async {
+    func scanScreenshotAlbum(in range: ScreenshotDateRange, automatic: Bool = false) async {
         guard let repository, !operationRunning else { return }
         guard scanSession == nil else { message = "请先继续或停止上次的扫描。"; return }
         do { _ = try range.interval() } catch { message = error.localizedDescription; return }
@@ -192,7 +379,7 @@ final class SiftStore: ObservableObject {
         do {
             let assets = try await fetchAssets(range).filter { range.contains($0.createdAt) }
             scanTotal = assets.count
-            var session = ScanSession(range: range, total: assets.count, report: ScanReport())
+            var session = ScanSession(range: range, total: assets.count, report: ScanReport(), automatic: automatic)
             var registered: [ProcessingJob] = []
             for asset in assets {
                 if let outcome = knownOutcome(for: asset) {
@@ -210,7 +397,10 @@ final class SiftStore: ObservableObject {
             scanSession = session
             scanReport = session.report
             await runScanSession()
-        } catch { message = error.localizedDescription }
+        } catch {
+            if automatic { automaticRecognitionStatus = "自动更新失败：\(error.localizedDescription)" }
+            else { message = error.localizedDescription }
+        }
     }
 
     func stopScanning() {
@@ -238,7 +428,8 @@ final class SiftStore: ObservableObject {
             try? repository?.save(session: session)
             scanSuspended = true
         }
-        message = reason
+        if scanSession?.automatic == true { automaticRecognitionStatus = reason }
+        else { message = reason }
         LocalModelEngine.shared.interrupt()
     }
 
@@ -255,7 +446,8 @@ final class SiftStore: ObservableObject {
             scanSession = nil
             scanSuspended = false
             try? repository.cleanUnreferencedImages()
-            message = scanReport.summary(stopped: true)
+            if session.automatic == true { automaticRecognitionStatus = "自动识别已停止。" }
+            else { message = scanReport.summary(stopped: true) }
         } catch { message = error.localizedDescription }
     }
 
@@ -283,13 +475,15 @@ final class SiftStore: ObservableObject {
         if stopRequested { discardPendingScan(); return }
         if jobs.contains(where: { $0.scanSessionID == session.id && $0.state != .failed }) {
             scanSuspended = true
-            message = "扫描已暂停，已处理 \(scanReport.processed) / \(scanTotal) 张；进度已保存。"
+            if session.automatic == true { automaticRecognitionStatus = "后台处理已暂停；打开 Sift 后会继续。" }
+            else { message = "扫描已暂停，已处理 \(scanReport.processed) / \(scanTotal) 张；进度已保存。" }
         } else {
             do {
                 try repository?.save(session: nil)
                 scanSession = nil
                 scanSuspended = false
-                message = scanReport.summary()
+                if session.automatic == true { automaticRecognitionStatus = "最近截图已处理。" }
+                else { message = scanReport.summary() }
             } catch { message = error.localizedDescription }
         }
     }
@@ -318,6 +512,9 @@ final class SiftStore: ObservableObject {
         busy = false
         Task { await LocalModelEngine.shared.release() }
         if !paused && scanSession?.requiresResume != true && jobs.contains(where: { $0.state != .failed }) { Task { await resumeJobs() } }
+        else if automaticUpdateRequested && !automaticSyncPreparing {
+            Task { await automaticScreenshotUpdateIfEnabled() }
+        }
     }
 
     private func resumeJobs() async {
@@ -352,7 +549,7 @@ final class SiftStore: ObservableObject {
 
     private func complete(_ job: ProcessingJob, outcome: ScanRecord.Outcome, processingOutcome: ProcessingOutcome) throws {
         guard let repository else { throw LocalError.storage("数据库不可用") }
-        let record = ScanRecord(assetIdentifier: job.photoAssetIdentifier, assetModifiedAt: job.photoAssetModifiedAt, fingerprint: job.fingerprint, ruleVersion: extractionVersion, outcome: outcome)
+        let record = ScanRecord(assetIdentifier: job.photoAssetIdentifier, assetModifiedAt: job.photoAssetModifiedAt, assetCreatedAt: job.photoAssetCreatedAt, fingerprint: job.fingerprint, ruleVersion: extractionVersion, outcome: outcome)
         var updatedSession = scanSession
         if updatedSession?.id == job.scanSessionID { updatedSession?.report.include(processingOutcome) }
         try repository.finish(jobID: job.id, record: record, session: updatedSession)
@@ -423,10 +620,13 @@ final class SiftStore: ObservableObject {
             updateJob(job)
             switch try await extract(document) {
             case .ignored:
+                if let id = job.replacementItemID, items.contains(where: { $0.id == id }) {
+                    throw SemanticError.reprocessingUnconfirmed
+                }
                 try complete(job, outcome: .ignored, processingOutcome: .ignored)
                 return .ignored
             case .accepted(var item):
-                let previous = items.first { ($0.photoAssetIdentifier != nil && $0.photoAssetIdentifier == job.photoAssetIdentifier) || $0.fingerprint == job.fingerprint }
+                let previous = items.first { $0.id == job.replacementItemID || ($0.photoAssetIdentifier != nil && $0.photoAssetIdentifier == job.photoAssetIdentifier) || $0.fingerprint == job.fingerprint }
                 if let previous {
                     item.id = previous.id
                     item.createdAt = previous.createdAt
@@ -434,27 +634,22 @@ final class SiftStore: ObservableObject {
                     item.note = previous.note
                     item.reminderAt = previous.reminderAt
                     item.intents = previous.intents
-                    // A confirmation applies only to the same screenshot and OCR content.
-                    if previous.displayApproval == .userConfirmed,
-                       previous.fingerprint == job.fingerprint, previous.rawText == item.rawText {
-                        item.confirmForDisplay()
-                    } else if previous.titleWasUserEdited || previous.categoryWasUserEdited || previous.fields.contains(where: \.isUserEdited) {
-                        item.displayApproval = nil
-                        item.state = .needsReview
-                        item.reviewReasons = Array(Set((item.reviewReasons ?? []) + ["识别结果已更新，请核对保留的修改"])).sorted()
+                    if previous.titleWasUserEdited || previous.categoryWasUserEdited || previous.fields.contains(where: \.isUserEdited) {
+                        item.reviewReasons = Array(Set((item.reviewReasons ?? []) + ["识别结果已更新，保留了你的修改"])).sorted()
                     }
                     if previous.state == .completed || previous.state == .archived { item.state = previous.state }
                 }
                 item.fingerprint = job.fingerprint
                 item.imageName = job.imageName
                 item.photoAssetIdentifier = job.photoAssetIdentifier
-                item.requireReviewBeforeDisplay()
+                item.photoAssetCreatedAt = job.photoAssetCreatedAt
+                item.prepareForDisplay()
                 try save(item)
-                try complete(job, outcome: .accepted, processingOutcome: item.state == .needsReview ? .review : .added)
+                try complete(job, outcome: .accepted, processingOutcome: item.needsReprocessing ? .review : .added)
                 if let previous, previous.imageName != job.imageName && !items.contains(where: { $0.imageName == previous.imageName }) {
                     try? FileManager.default.removeItem(at: repository.directory.appendingPathComponent(previous.imageName))
                 }
-                return item.state == .needsReview ? .review : .added
+                return item.needsReprocessing ? .review : .added
             }
         } catch {
             job.state = paused ? .queued : .failed
@@ -490,7 +685,10 @@ struct SiftApp: App {
             appContent.environmentObject(store).tint(SiftStyle.ink)
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .background || phase == .inactive { store.setForeground(false) }
-                    else if phase == .active { store.setForeground(true) }
+                    else if phase == .active {
+                        store.setForeground(true)
+                        Task { await store.automaticScreenshotUpdateIfEnabled(forceUpdate: true) }
+                    }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)) { _ in store.handleMemoryWarning() }
         }
@@ -510,18 +708,27 @@ struct SiftApp: App {
 struct HomeView: View {
     @EnvironmentObject var store: SiftStore
     @State private var selection: [PhotosPickerItem] = []
+    @StateObject private var photoChanges = PhotoLibraryChangeMonitor()
     @State private var showingScanRange = PreviewLaunchOptions.previewScan
     @State private var selectedTab = PreviewLaunchOptions.previewTab
     var body: some View {
         TabView(selection: $selectedTab) {
             collection("今天", mode: 0).tabItem { Label("今天", systemImage: "sun.max") }.tag(0)
-            collection("待确认", mode: 1).tabItem { Label("待确认", systemImage: "tray") }.tag(1).badge(store.items.filter(\.requiresHumanReview).count)
+            collection("已完成", mode: 1).tabItem { Label("已完成", systemImage: "checkmark.circle") }.tag(1)
             collection("信息库", mode: 2).tabItem { Label("信息库", systemImage: "square.stack") }.tag(2)
             NavigationStack {
                 SettingsView()
             }.tabItem { Label("设置", systemImage: "gearshape") }.tag(3)
         }
         .alert("Sift", isPresented: Binding(get: { store.message != nil }, set: { if !$0 { store.message = nil } })) { Button("好", role: .cancel) {} } message: { Text(store.message ?? "") }
+        .onAppear {
+            photoChanges.start()
+            Task { await store.automaticScreenshotUpdateIfEnabled(forceUpdate: true) }
+        }
+        .onChange(of: photoChanges.changeCount) { _, _ in
+            Task { await store.automaticScreenshotUpdateIfEnabled(forceUpdate: true) }
+        }
+        .onDisappear { photoChanges.stop() }
         .sheet(isPresented: $showingScanRange) { ScreenshotScanSheet() }
         .onChange(of: selection) { _, picked in
             guard !picked.isEmpty else { return }
@@ -594,7 +801,7 @@ struct CollectionView: View {
     @State private var expandedGroups: Set<CategoryGroup> = []
 
     private var baseItems: [InformationItem] {
-        store.items.filter { mode == 2 ? !$0.requiresHumanReview : (mode == 1 ? $0.requiresHumanReview : $0.state == .pending && !$0.requiresHumanReview) }
+        store.displayableItems.filter { mode == 2 || (mode == 1 ? $0.displayState == .completed : $0.displayState == .pending) }
     }
     private var filtering: Bool { !query.isEmpty || category != nil || !selectedIntents.isEmpty }
     var visible: [InformationItem] {
@@ -611,12 +818,16 @@ struct CollectionView: View {
             VStack(alignment: .leading, spacing: 18) {
                 masthead
                 searchBar
-                if mode == 1 {
-                    Text("核对原图，修改分类或字段，再确认加入首页。")
-                        .font(.subheadline).foregroundStyle(SiftStyle.secondaryInk)
-                }
-                if !store.jobs.isEmpty {
-                    ProcessingQueueCard(jobs: store.jobs) { job in Task { await store.retry(job) } }
+                if mode == 2 {
+                    NavigationLink { ReprocessingView() } label: {
+                        HStack {
+                            Label("重新处理", systemImage: "arrow.clockwise")
+                            Spacer()
+                            Text("\(store.reprocessingEntries.count)").monospacedDigit()
+                            Image(systemName: "chevron.right").font(.caption)
+                        }.font(.subheadline.weight(.medium)).foregroundStyle(SiftStyle.ink)
+                            .padding(16).siftPaper(radius: 16)
+                    }.buttonStyle(SiftPressStyle()).accessibilityIdentifier("library.reprocessing")
                 }
                 if filtering {
                     HStack {
@@ -629,7 +840,7 @@ struct CollectionView: View {
                 VStack(spacing: 24) {
                         ForEach(CategoryGroup.allCases.filter { category == nil || category == $0 }) { group in
                             let cards = visible.filter { $0.category.group == group }.sorted { $0.createdAt > $1.createdAt }
-                            CardStackSection(group: group, items: cards, expanded: expandedGroups.contains(group) || filtering) {
+                            CardStackSection(group: group, items: cards, expanded: expandedGroups.contains(group) || filtering, automaticExpansion: filtering) {
                                 if expandedGroups.contains(group) { expandedGroups.remove(group) }
                                 else { expandedGroups.insert(group) }
                             }
@@ -642,7 +853,7 @@ struct CollectionView: View {
     }
 
     private var headline: some View {
-        Text(mode == 0 ? "今天" : mode == 1 ? "待确认" : "信息库")
+        Text(mode == 0 ? "今天" : mode == 1 ? "已完成" : "信息库")
             .font(.title.weight(.bold)).foregroundStyle(SiftStyle.ink)
             .fixedSize(horizontal: false, vertical: true).accessibilityIdentifier("home.tagline")
     }
@@ -701,9 +912,9 @@ struct CollectionView: View {
     private var emptyState: some View {
         VStack(spacing: 14) {
             ScreenshotIllustration()
-            Text(filtering ? "暂时没有找到。" : mode == 1 ? "都确认好了。" : "从一张截图开始。")
+            Text(filtering ? "暂时没有找到。" : mode == 1 ? "还没有完成的信息。" : "从一张截图开始。")
                 .font(.title2.weight(.medium)).foregroundStyle(SiftStyle.ink)
-            Text(filtering ? "换个关键词，或试试其他筛选条件。" : mode == 1 ? "需要确认的信息，会出现在这里。" : "选一段时间，让有用的信息各归其位。")
+            Text(filtering ? "换个关键词，或试试其他筛选条件。" : mode == 1 ? "标记为已完成的信息，会出现在这里。" : "选一段时间，让有用的信息各归其位。")
                 .font(.subheadline).foregroundStyle(SiftStyle.secondaryInk).multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
             if filtering {
@@ -848,7 +1059,7 @@ struct DetailView: View {
                     editField(slot.label, value: cardFieldBinding(slot))
                 }
             }
-            if item.requiresHumanReview {
+            Group {
                 let primaryKinds = Set(item.category.cardFields.compactMap(\.editableKind))
                 let extraFields = item.fields.filter { !primaryKinds.contains($0.kind) && ![FieldKind.note, .code, .amount].contains($0.kind) }
                 if !extraFields.isEmpty {
@@ -873,9 +1084,8 @@ struct DetailView: View {
                 editField("备注", value: Binding(get: { item.note }, set: { item.note = $0; item.setUserEditedValue($0, for: .note) }))
                 Picker("状态", selection: Binding(get: { item.displayState }, set: {
                     item.state = $0
-                    if $0 == .needsReview { item.displayApproval = nil }
                 })) {
-                    ForEach(ItemState.allCases.filter { !item.requiresHumanReview || $0 != .pending }, id: \.self) { Text($0.displayName).tag($0) }
+                    ForEach(ItemState.allCases.filter { $0 != .needsReview }, id: \.self) { Text($0.displayName).tag($0) }
                 }
             }
             SiftDisclosureSection("使用目的") {
@@ -908,13 +1118,13 @@ struct DetailView: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
-                    Text(item.classificationConfidence < 0.8 ? "建议确认分类后再继续处理。" : "分类来自旧版本地规则，未上传截图或文字。")
+                    Text(item.classificationConfidence < 0.8 ? "如分类不合适，可直接修改。" : "分类来自旧版本地规则，未上传截图或文字。")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             }
             if let reasons = item.reviewReasons, !reasons.isEmpty {
-                DetailSection(item.requiresHumanReview ? "需要确认" : "已核对的问题") {
+                SiftDisclosureSection("识别提示") {
                     ForEach(reasons, id: \.self) { Text($0).font(.subheadline) }
                 }
             }
@@ -956,19 +1166,13 @@ struct DetailView: View {
                 SiftDisclosureSection("同图其他事项") {
                     ForEach(Array(scenes.dropFirst())) { scene in
                         VStack(alignment: .leading, spacing: 8) {
-                            if item.requiresHumanReview {
-                                editField("事项标题", value: sceneTitleBinding(scene.id))
-                                Picker("类型", selection: sceneCategoryBinding(scene.id)) {
-                                    ForEach(Category.allCases, id: \.self) { Text($0.displayName).tag($0) }
-                                }
-                            } else { Text(scene.title).font(.headline) }
+                            editField("事项标题", value: sceneTitleBinding(scene.id))
+                            Picker("类型", selection: sceneCategoryBinding(scene.id)) {
+                                ForEach(Category.allCases, id: \.self) { Text($0.displayName).tag($0) }
+                            }
                             ForEach(scene.reviewReasons, id: \.self) { reason in Text(reason).font(.caption).foregroundStyle(SiftStyle.secondaryInk) }
                             ForEach(scene.fields) { field in
-                                if item.requiresHumanReview {
-                                    editField(field.kind.displayName, value: sceneFieldBinding(sceneID: scene.id, fieldID: field.id))
-                                } else {
-                                    Text("\(field.kind.displayName)：\(field.displayValue)").font(.subheadline)
-                                }
+                                editField(field.kind.displayName, value: sceneFieldBinding(sceneID: scene.id, fieldID: field.id))
                                 if let document = item.ocrDocument {
                                     Text(field.sourceBlockIDs.compactMap { id in document.blocks.first { $0.id == id }?.text }.joined(separator: "\n"))
                                         .font(.caption).foregroundStyle(.secondary)
@@ -1014,7 +1218,7 @@ struct DetailView: View {
                             catch { LocalReminders.cancel(item.id); item.reminderAt = nil; throw error }
                         } catch { store.message = error.localizedDescription }
                     }
-                }.disabled(scheduling || item.requiresHumanReview).frame(minHeight: 44)
+                }.disabled(scheduling).frame(minHeight: 44)
                 if scheduling { ProgressView("正在设置提醒…") }
                 if item.reminderAt != nil {
                     Button("取消提醒", role: .destructive) { LocalReminders.cancel(item.id); item.reminderAt = nil; persist() }
@@ -1044,23 +1248,9 @@ struct DetailView: View {
         }.background(SiftStyle.background)
         .safeAreaInset(edge: .bottom) {
             VStack(spacing: 8) {
-                if item.requiresHumanReview {
-                    Button {
-                        let previous = item
-                        item.confirmForDisplay()
-                        if persist() { store.message = "已确认，信息已加入首页" }
-                        else { item = previous }
-                    } label: { Label("确认并加入首页", systemImage: "checkmark") }
-                        .buttonStyle(SiftPrimaryButton()).disabled(!canConfirm)
-                        .accessibilityIdentifier("detail.confirm")
-                    Button("保存修改，稍后确认") {
-                        if persist() { store.message = "修改已保存，仍在待确认中" }
-                    }.frame(minHeight: 44).accessibilityIdentifier("detail.saveDraft")
-                } else {
-                    Button { if persist() { store.message = "修改已保存" } } label: {
-                        Label("保存修改", systemImage: "checkmark")
-                    }.buttonStyle(SiftPrimaryButton())
-                }
+                Button { if persist() { store.message = "修改已保存" } } label: {
+                    Label("保存修改", systemImage: "checkmark")
+                }.buttonStyle(SiftPrimaryButton()).accessibilityIdentifier("detail.save")
             }.padding(.horizontal, SiftStyle.pageInset).padding(.vertical, 12).background(SiftStyle.background)
         }
         .fullScreenCover(isPresented: $showingScreenshot) { ScreenshotViewer(url: store.imageURL(item), title: item.title) }
@@ -1080,7 +1270,7 @@ struct DetailView: View {
                 return CategoryCardField(label: "实付金额", source: .fields(primary: .amount, fallbacks: []))
             }
             return slots.first { $0.editableKind == .price }
-        case .collections: return slots.last { $0.source != .title }
+        case .collections, .conversations: return slots.last { $0.source != .title }
         }
     }
 
@@ -1178,15 +1368,6 @@ struct DetailView: View {
         )
     }
 
-    private var canConfirm: Bool {
-        !item.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        item.fields.contains { !$0.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty } &&
-        (item.recognizedScenes ?? []).dropFirst().allSatisfy { scene in
-            !scene.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-            scene.fields.contains { !$0.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
-        }
-    }
-
     private func fieldBinding(_ id: UUID) -> Binding<String> {
         Binding(get: { item.fields.first { $0.id == id }?.displayValue ?? "" }, set: { value in
             guard let index = item.fields.firstIndex(where: { $0.id == id }) else { return }
@@ -1223,13 +1404,13 @@ struct DetailView: View {
     @discardableResult private func persist() -> Bool {
         do {
             if item.state == .completed || item.state == .archived { item.reminderAt = nil }
-            item.requireReviewBeforeDisplay()
             if item.recognizedScenes?.isEmpty == false {
                 item.recognizedScenes?[0].category = item.category
                 item.recognizedScenes?[0].title = item.title
                 item.recognizedScenes?[0].fields = item.fields
             }
             try store.save(item)
+            if let saved = store.items.first(where: { $0.id == item.id }) { item = saved }
             if item.reminderAt == nil { LocalReminders.cancel(item.id) }
             return true
         } catch { store.message = error.localizedDescription; return false }

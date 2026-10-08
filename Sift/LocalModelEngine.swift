@@ -167,12 +167,18 @@ actor LocalModelEngine: SemanticExtracting {
             }
         }
         let layout = LayoutAnalysis(document: document)
-        guard !document.rawText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { throw SemanticError.invalidOutput }
-        guard !layout.body(0).isEmpty || layout.regions.contains(where: { $0 > 0 }) else { throw SemanticError.invalidOutput }
+        guard !document.rawText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            lastMetrics.path = "ignoredEmptyOCR"
+            return .ignored
+        }
+        guard layout.blocks.indices.contains(where: { layout.regions[$0] >= 0 && !LayoutAnalysis.noise(layout.blocks[$0]) }) else {
+            lastMetrics.path = "ignoredInterfaceOnly"
+            return .ignored
+        }
         if !modelOnly, let decision = try GroundedExtraction.direct(layout) {
             lastMetrics.path = "direct"
             trace?("PATH direct seconds=\(Date().timeIntervalSince(started))")
-            return applyingModelVersion(decision, independentlyVerifiedScene: true)
+            return applyingModelVersion(decision)
         }
         let partial = modelOnly ? nil : try GroundedExtraction.direct(layout,requireComplete:false)
         lastMetrics.path = partial == nil ? "model" : "hybrid"
@@ -214,12 +220,17 @@ actor LocalModelEngine: SemanticExtracting {
                 payload: payload, instructions: SceneJudgmentPolicy.instructions, schema: SceneJudgmentPolicy.schema, maxTokens: 192, deadline: deadline)
             lastMetrics.outputTokens.append(tokenizer.encode(text:output).count)
             trace?("SCENE JUDGMENT " + output)
-            let response = try SceneJudgmentPolicy.decode(output, layout: layout, payload:payload)
+            let response: SemanticSelection
+            do { response = try SceneJudgmentPolicy.decode(output, layout: layout, payload:payload) }
+            catch SemanticError.invalidOutput { throw SemanticError.unverifiedFields }
             // Validate every segment before merging. Malformed IDs never become ignored records.
-            _ = try SceneJudgmentPolicy.validate(response, layout: layout, checkIgnoreProof:false)
+            do { _ = try SceneJudgmentPolicy.validate(response, layout: layout, checkIgnoreProof:false) }
+            catch SemanticError.invalidOutput { throw SemanticError.unverifiedFields }
             scenes += response.s
         }
-        let modelDecision = try SceneJudgmentPolicy.validate(SemanticSelection(s: scenes, u: scenes.isEmpty ? "ignore" : "content"), layout: layout)
+        let modelDecision: ExtractionDecision
+        do { modelDecision = try SceneJudgmentPolicy.validate(SemanticSelection(s: scenes, u: scenes.isEmpty ? "ignore" : "content"), layout: layout) }
+        catch SemanticError.invalidOutput { throw SemanticError.unverifiedFields }
         let decision = GroundedExtraction.merge([partial,modelDecision].compactMap { $0 })
         trace?("MODEL seconds=\(Date().timeIntervalSince(started))")
         return applyingModelVersion(decision)
@@ -228,10 +239,10 @@ actor LocalModelEngine: SemanticExtracting {
 
     private func releaseIfIdle() { if !running { release() } }
 
-    private func applyingModelVersion(_ decision: ExtractionDecision, independentlyVerifiedScene: Bool = false) -> ExtractionDecision {
+    private func applyingModelVersion(_ decision: ExtractionDecision) -> ExtractionDecision {
         guard case .accepted(var item) = decision else { return decision }
         item.classificationVersion = identity.policyVersion
-        return .accepted(DisplayAdmission.apply(to: item, independentlyVerifiedScene: independentlyVerifiedScene))
+        return .accepted(DisplayAdmission.apply(to: item))
     }
 
     #if os(macOS)
@@ -333,7 +344,7 @@ actor LocalModelEngine: SemanticExtracting {
         defer { lastMetrics.seconds = Date().timeIntervalSince(started) }
         let layout = LayoutAnalysis(document:document)
         guard !document.rawText.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty else { throw SemanticError.invalidOutput }
-        if !modelOnly, let direct = try GroundedExtraction.direct(layout) { return applyingModelVersion(direct, independentlyVerifiedScene: true) }
+        if !modelOnly, let direct = try GroundedExtraction.direct(layout) { return applyingModelVersion(direct) }
         guard let directory else { throw SemanticError.modelMissing }
         if replayTokenizer == nil { replayTokenizer = try await OfflineTokenizerLoader().load(from:directory) }
         guard let tokenizer = replayTokenizer else { throw SemanticError.modelMissing }
@@ -378,7 +389,8 @@ actor LocalModelEngine: SemanticExtracting {
         catch {
             if control.isStopped || Task.isCancelled { throw SemanticError.interrupted }
             if Date() >= deadline { throw SemanticError.timeout }
-            throw SemanticError.invalidOutput
+            trace?("GENERATION ERROR " + String(describing: error))
+            throw SemanticError.inferenceFailed
         }
     }
 

@@ -4,6 +4,8 @@ import PhotosUI
 struct SettingsView: View {
     @EnvironmentObject private var store: SiftStore
     @Environment(\.scenePhase) private var scenePhase
+    @AppStorage(AutomaticRecognitionSettings.enabledKey) private var automaticRecognitionEnabled = false
+    @AppStorage(AutomaticRecognitionSettings.retentionDaysKey) private var automaticRetentionDays = AutomaticRecognitionSettings.defaultRetentionDays
     @State private var photoStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
     @State private var usage: SettingsUsage?
     @State private var showingPrivacy = false
@@ -13,6 +15,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 24) {
                 Text("设置").font(.title.weight(.bold)).foregroundStyle(SiftStyle.ink)
                     .frame(minHeight: 44).accessibilityAddTraits(.isHeader)
+                automaticRecognitionCard
                 VStack(spacing: 0) {
                     NavigationLink { PhotoAccessView() } label: {
                         SettingsRow(title: "照片权限", detail: photoStatus.siftDescription, symbol: "photo")
@@ -38,9 +41,50 @@ struct SettingsView: View {
             .toolbar(.hidden, for: .navigationBar)
             .sheet(isPresented: $showingPrivacy) { PrivacyView() }
             .task { await refresh() }
+            .onAppear {
+                if !AutomaticRecognitionSettings.availableRetentionDays.contains(automaticRetentionDays) {
+                    automaticRetentionDays = AutomaticRecognitionSettings.defaultRetentionDays
+                }
+            }
+            .onChange(of: automaticRecognitionEnabled) { _, enabled in
+                Task { await store.updateAutomaticRecognition(enabled: enabled, retentionDays: automaticRetentionDays) }
+            }
+            .onChange(of: automaticRetentionDays) { _, days in
+                guard automaticRecognitionEnabled else { return }
+                Task { await store.updateAutomaticRecognition(enabled: true, retentionDays: days) }
+            }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active { Task { await refresh() } }
             }
+    }
+
+    private var automaticRecognitionCard: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(alignment: .center) {
+                Label("自动识别", systemImage: "sparkles.rectangle.stack")
+                    .font(.headline).foregroundStyle(SiftStyle.ink)
+                Spacer(minLength: 12)
+                Toggle("自动识别", isOn: $automaticRecognitionEnabled)
+                    .labelsHidden().tint(SiftStyle.accent)
+                    .accessibilityIdentifier("settings.autoRecognition.toggle")
+            }
+            Picker("识别并保留最近", selection: $automaticRetentionDays) {
+                ForEach(AutomaticRecognitionSettings.availableRetentionDays, id: \.self) { days in
+                    Text("\(days) 天").tag(days)
+                }
+            }.pickerStyle(.segmented).accessibilityIdentifier("settings.autoRecognition.retention")
+            Text(automaticRecognitionEnabled
+                 ? "打开 Sift 或应用在前台检测到新截图时，自动处理最近所选天数内尚未识别的截图。已开始的扫描可在 iOS 授权时切到后台继续；应用挂起或退出时，新截图会在下次打开 Sift 后检查。超期卡片和本地副本从 Sift 移除，照片原图保留。"
+                 : "开启后会在打开 Sift 或应用前台发现新截图时，自动处理最近所选天数内尚未识别的图片，并按此期限清理 Sift 中的旧截图。")
+                .font(.footnote).foregroundStyle(SiftStyle.secondaryInk)
+                .fixedSize(horizontal: false, vertical: true)
+            if let status = store.automaticRecognitionStatus {
+                Text(status).font(.footnote.weight(.medium)).foregroundStyle(SiftStyle.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("settings.autoRecognition.status")
+            }
+        }
+        .padding(18).siftPaper(radius: 18)
     }
 
     private var version: String {

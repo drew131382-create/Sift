@@ -39,7 +39,7 @@ enum ProcessingJobState: String, Codable, CaseIterable {
         case .loadingImage: return "读取图片"
         case .recognizingText: return "本地识别文字"
         case .extractingFields: return "本地理解内容"
-        case .needsReview: return "等待确认"
+        case .needsReview: return "已识别"
         case .completed: return "已完成"
         case .failed: return "处理失败"
         }
@@ -50,6 +50,7 @@ struct ProcessingJob: Codable, Identifiable {
     var id = UUID()
     var imageName: String
     var fingerprint: String
+    var replacementItemID: UUID? = nil
     var photoAssetIdentifier: String? = nil
     var photoAssetCreatedAt: Date? = nil
     var photoAssetModifiedAt: Date? = nil
@@ -67,8 +68,40 @@ struct LocalPhotoAsset: Identifiable {
 }
 
 @MainActor
+final class PhotoLibraryChangeMonitor: NSObject, ObservableObject, PHPhotoLibraryChangeObserver {
+    @Published private(set) var changeCount = 0
+    private var registered = false
+
+    func start() {
+        guard !registered else { return }
+        PHPhotoLibrary.shared().register(self)
+        registered = true
+    }
+
+    func stop() {
+        guard registered else { return }
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
+        registered = false
+    }
+
+    nonisolated func photoLibraryDidChange(_ changeInstance: PHChange) {
+        Task { @MainActor [weak self] in self?.changeCount += 1 }
+    }
+}
+
+@MainActor
 enum LocalPhotoLibrary {
     static var hasLimitedAccess: Bool { PHPhotoLibrary.authorizationStatus(for: .readWrite) == .limited }
+
+    static func creationDates(for identifiers: [String]) async -> [String: Date] {
+        guard !identifiers.isEmpty else { return [:] }
+        let assets = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        var dates: [String: Date] = [:]
+        assets.enumerateObjects { asset, _, _ in
+            if let date = asset.creationDate { dates[asset.localIdentifier] = date }
+        }
+        return dates
+    }
 
     static func screenshotAssets(in range: ScreenshotDateRange) async throws -> [LocalPhotoAsset] {
         let interval = try range.interval()
@@ -275,6 +308,34 @@ final class LocalRepository {
         defer { sqlite3_finalize(statement) }
         _ = jobID.uuidString.withCString { sqlite3_bind_text(statement, 1, $0, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self)) }
         guard sqlite3_step(statement) == SQLITE_DONE else { throw LocalError.storage("任务删除失败") }
+    }
+
+    func delete(itemID: UUID) throws {
+        if hasFTS {
+            var indexStatement: OpaquePointer?
+            if sqlite3_prepare_v2(db, "DELETE FROM search_index WHERE item_id = ?", -1, &indexStatement, nil) == SQLITE_OK {
+                defer { sqlite3_finalize(indexStatement) }
+                _ = itemID.uuidString.withCString { sqlite3_bind_text(indexStatement, 1, $0, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self)) }
+                guard sqlite3_step(indexStatement) == SQLITE_DONE else { throw LocalError.storage("搜索索引删除失败") }
+            }
+        }
+        var statement: OpaquePointer?
+        guard sqlite3_prepare_v2(db, "DELETE FROM items WHERE id = ?", -1, &statement, nil) == SQLITE_OK else {
+            throw LocalError.storage("信息卡删除准备失败")
+        }
+        defer { sqlite3_finalize(statement) }
+        _ = itemID.uuidString.withCString { sqlite3_bind_text(statement, 1, $0, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self)) }
+        guard sqlite3_step(statement) == SQLITE_DONE else { throw LocalError.storage("信息卡删除失败") }
+    }
+
+    func deleteScanRecord(key: String) throws {
+        var statement: OpaquePointer?
+        guard sqlite3_prepare_v2(db, "DELETE FROM scan_records WHERE record_key = ?", -1, &statement, nil) == SQLITE_OK else {
+            throw LocalError.storage("扫描记录删除准备失败")
+        }
+        defer { sqlite3_finalize(statement) }
+        _ = key.withCString { sqlite3_bind_text(statement, 1, $0, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self)) }
+        guard sqlite3_step(statement) == SQLITE_DONE else { throw LocalError.storage("扫描记录删除失败") }
     }
 
     func loadScanRecords() throws -> [ScanRecord] {

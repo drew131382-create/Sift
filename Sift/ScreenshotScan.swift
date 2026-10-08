@@ -24,6 +24,18 @@ struct ScreenshotDateRange: Hashable, Codable {
     }
 }
 
+enum AutomaticRecognitionSettings {
+    static let enabledKey = "automaticScreenshotRecognition.enabled"
+    static let retentionDaysKey = "automaticScreenshotRecognition.retentionDays"
+    static let availableRetentionDays = [7, 30, 90]
+    static let defaultRetentionDays = 7
+
+    static func retentionDays(from defaults: UserDefaults) -> Int {
+        let stored = defaults.integer(forKey: retentionDaysKey)
+        return availableRetentionDays.contains(stored) ? stored : defaultRetentionDays
+    }
+}
+
 enum ScanRangeError: LocalizedError {
     case reversed, future
     var errorDescription: String? {
@@ -38,6 +50,7 @@ struct ScanRecord: Codable {
     enum Outcome: String, Codable { case accepted, ignored }
     var assetIdentifier: String?
     var assetModifiedAt: Date?
+    var assetCreatedAt: Date? = nil
     var fingerprint: String
     var ruleVersion: String
     var outcome: Outcome
@@ -63,10 +76,12 @@ struct ScanSession: Codable {
     var report: ScanReport
     // System cancellation / memory pressure requires an explicit resume.
     var requiresResume = false
+    var automatic: Bool? = nil
 }
 
 struct ScanReport: Codable {
     var added = 0
+    // Codable key retained for legacy sessions; now counts incomplete cards.
     var review = 0
     var ignored = 0
     var alreadyKnown = 0
@@ -83,6 +98,6 @@ struct ScanReport: Codable {
         }
     }
     func summary(stopped: Bool = false) -> String {
-        "\(stopped ? "扫描已停止" : "处理完成")\n新增 \(added) 张 · 待确认 \(review) 张\n无关跳过 \(ignored) 张 · 已处理跳过 \(alreadyKnown) 张\n失败 \(failed) 张"
+        "\(stopped ? "扫描已停止" : "处理完成")\n新增 \(added) 张 · 需重新处理 \(review) 张\n无关跳过 \(ignored) 张 · 已处理跳过 \(alreadyKnown) 张\n失败 \(failed) 张"
     }
 }

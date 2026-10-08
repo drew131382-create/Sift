@@ -366,6 +366,17 @@ final class GroundedExtractionTests: XCTestCase {
             XCTAssertFalse(item.fields.contains { $0.kind == .eventTime || $0.kind == .amount })
         }
     }
+    func testMultiParagraphCollectionPassesFinalDisplayAdmission() throws {
+        var document = doc(["设备设置操作指南", "第一步：打开设备设置并找到显示菜单。", "第二步：选择护眼模式后保存配置。", "第三步：重新打开页面检查设置。"])
+        // Consecutive paragraphs in one compact page region, as in real screenshots.
+        for index in document.blocks.indices { document.blocks[index].boundingBox.origin.y = 0.85 - Double(index) * 0.03 }
+        let item = try accepted(judged("收藏", "参考", [], document))
+        XCTAssertGreaterThan(item.fields.filter { $0.kind == .excerpt }.count, 1)
+        let visible = DisplayAdmission.apply(to: item)
+        XCTAssertEqual(visible.state, .pending)
+        XCTAssertEqual(visible.reprocessingReasons, [])
+        XCTAssertEqual(visible.fields, item.fields)
+    }
     func testModelCanIgnoreIncidentalURLWithoutLosingBusinessProof() throws {
         let layout = LayoutAnalysis(document:doc(["新闻", "商品上市的简短报道", "来源：https://example.com/news"]))
         let response = try SceneJudgmentPolicy.decode("{\"category\":\"无关\",\"arrangement\":\"无\"}",layout:layout)

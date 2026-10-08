@@ -137,12 +137,12 @@ final class SemanticExtractionTests: XCTestCase {
         var b = a; b.fields[0].value = "B456"
         XCTAssertEqual(SemanticInput.merge([SemanticResponse(scenes: [a]), SemanticResponse(scenes: [b])]).scenes[0].fields.count, 2)
     }
-    func testFourGroupsPreserveHistoricalCategories() {
-        XCTAssertEqual(CategoryGroup.allCases.count, 4)
+    func testFiveGroupsPreserveHistoricalCategories() {
+        XCTAssertEqual(CategoryGroup.allCases.count, 5)
         XCTAssertEqual(Sift.Category.delivery.group, .collectionCodes)
         XCTAssertEqual(Sift.Category.health.group, .schedules)
         XCTAssertEqual(Sift.Category.documentation.group, .purchases)
-        XCTAssertEqual(Sift.Category.social.group, .collections)
+        XCTAssertEqual(Sift.Category.social.group, .conversations)
         XCTAssertEqual(Sift.Category.other.group, .collections)
     }
     func testMultipleScenesChooseCodesAndRequireConfirmation() throws {

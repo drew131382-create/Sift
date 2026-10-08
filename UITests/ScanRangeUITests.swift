@@ -3,6 +3,7 @@ import XCTest
 final class ScanRangeUITests: XCTestCase {
     func testBothScanEntrypointsOpenDateSelectionWithoutStarting() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["--ui-empty-fixtures"]
         app.launch()
         let scanButtons = app.buttons.matching(identifier: "扫描截图相册")
         XCTAssertTrue(scanButtons.firstMatch.waitForExistence(timeout: 10))
